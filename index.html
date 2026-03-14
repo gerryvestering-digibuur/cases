@@ -14,7 +14,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-body { padding: 0 20px 20px; }
+body { padding: 10px 20px 10px; }
 
 /* ===== SVG ICONS ===== */
 .ico { display: inline-block; vertical-align: middle; }
@@ -24,8 +24,8 @@ body { padding: 0 20px 20px; }
 .tabs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 12px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
@@ -33,8 +33,8 @@ body { padding: 0 20px 20px; }
 .tab {
   background: rgba(255,255,255,0.08);
   border: 2px solid rgba(255,255,255,0.1);
-  border-radius: 14px;
-  padding: 12px 10px;
+  border-radius: 12px;
+  padding: 8px 8px 10px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -49,24 +49,24 @@ body { padding: 0 20px 20px; }
 .tab.active {
   border-color: transparent;
   color: #fff;
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 /* Tab active colors match left card */
-.tab.active[data-i="0"] { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 8px 28px rgba(59,130,246,0.35); }
-.tab.active[data-i="1"] { background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 8px 28px rgba(168,85,247,0.35); }
-.tab.active[data-i="2"] { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 8px 28px rgba(16,185,129,0.35); }
-.tab.active[data-i="3"] { background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 8px 28px rgba(249,115,22,0.35); }
+.tab.active[data-i="0"] { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 6px 20px rgba(59,130,246,0.35); }
+.tab.active[data-i="1"] { background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 6px 20px rgba(168,85,247,0.35); }
+.tab.active[data-i="2"] { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
+.tab.active[data-i="3"] { background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 6px 20px rgba(249,115,22,0.35); }
 
-.tab-icon { display: block; margin: 0 auto 5px; }
+.tab-icon { display: block; margin: 0 auto 3px; }
 .tab-icon svg { margin: 0 auto; }
-.tab-label { font-size: 19px; font-weight: 700; display: block; line-height: 1.2; color: #F5F5F5; }
+.tab-label { font-size: 16px; font-weight: 700; display: block; line-height: 1.2; color: #F5F5F5; }
 
 /* ===== CARD ===== */
 .card {
   max-width: 1100px;
   margin: 0 auto;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
 }
 
@@ -75,64 +75,62 @@ body { padding: 0 20px 20px; }
 .panel.active {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 420px;
   animation: fadeIn 0.35s ease;
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ===== LEFT SIDE ===== */
 .left {
-  padding: 30px 32px;
+  padding: 22px 26px;
   color: #fff;
   display: flex;
   flex-direction: column;
 }
 .left-icon {
-  width: 44px; height: 44px;
+  width: 38px; height: 38px;
   background: rgba(255,255,255,0.18);
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
-.left-icon svg { width: 24px; height: 24px; }
+.left-icon svg { width: 20px; height: 20px; }
 .left h3 {
-  font-size: 24px; font-weight: 800; margin-bottom: 8px; line-height: 1.25; color: #fff;
+  font-size: 20px; font-weight: 800; margin-bottom: 5px; line-height: 1.25; color: #fff;
 }
 .left-sub {
-  font-size: 16px; font-weight: 600; opacity: 0.9; margin-bottom: 16px; color: #fff; line-height: 1.4;
+  font-size: 13.5px; font-weight: 600; opacity: 0.9; margin-bottom: 12px; color: #fff; line-height: 1.35;
 }
 
 /* Benefits list */
-.benefits { list-style: none; margin-bottom: 20px; }
+.benefits { list-style: none; margin-bottom: 14px; }
 .benefit {
-  display: flex; align-items: flex-start; gap: 9px;
-  margin-bottom: 10px; font-size: 15px; line-height: 1.45; color: #fff;
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-bottom: 6px; font-size: 13px; line-height: 1.4; color: #fff;
 }
 .benefit-check {
-  flex-shrink: 0; width: 20px; height: 20px;
+  flex-shrink: 0; width: 18px; height: 18px;
   background: rgba(255,255,255,0.2); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   margin-top: 1px;
 }
-.benefit-check svg { width: 11px; height: 11px; }
+.benefit-check svg { width: 10px; height: 10px; }
 
 /* CTA Button - DigiBuur huisstijl */
 .cta {
   display: block; width: 100%;
   background: linear-gradient(38deg, #301363, #08328570);
   color: #F5F5F5;
-  padding: 14px; border-radius: 12px;
-  font-size: 16px; font-weight: 700; text-align: center;
+  padding: 11px; border-radius: 10px;
+  font-size: 14px; font-weight: 700; text-align: center;
   text-decoration: none; border: 1px solid #748AB5; cursor: pointer;
   transition: all 0.25s ease; margin-top: auto;
 }
-.cta:hover { background: linear-gradient(38deg, #4a1d8e, #0a3fa0); border-color: #94a8d0; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(48,19,99,0.35); }
+.cta:hover { background: linear-gradient(38deg, #4a1d8e, #0a3fa0); border-color: #94a8d0; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(48,19,99,0.35); }
 
 /* ===== RIGHT SIDE (MOCKUP) ===== */
 .right {
-  padding: 24px 20px;
+  padding: 20px;
   display: flex; align-items: flex-start; justify-content: center;
-  padding-top: 28px;
 }
 /* Right side background matches theme with light tint */
 .panel[data-p="0"] .right { background: linear-gradient(135deg, #eef4ff, #dbeafe); }
@@ -141,85 +139,85 @@ body { padding: 0 20px 20px; }
 .panel[data-p="3"] .right { background: linear-gradient(135deg, #fff7ed, #ffedd5); }
 
 .mockup {
-  width: 100%; max-width: 440px;
-  border-radius: 16px; overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  width: 100%; max-width: 420px;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
   background: #fff;
 }
 .mock-head {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 16px; color: #fff;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; color: #fff;
 }
 .mock-av {
-  width: 32px; height: 32px;
+  width: 28px; height: 28px;
   background: rgba(255,255,255,0.25); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   line-height: 1;
 }
-.mock-av svg { width: 16px; height: 16px; }
-.mock-name { font-size: 13.5px; font-weight: 600; color: #fff; display: block; }
-.mock-sub { font-size: 10.5px; color: rgba(255,255,255,0.7); display: block; }
-.mock-body { padding: 14px 16px; background: #fff; }
+.mock-av svg { width: 14px; height: 14px; }
+.mock-name { font-size: 12.5px; font-weight: 600; color: #fff; display: block; }
+.mock-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
+.mock-body { padding: 12px 14px; background: #fff; }
 
 /* ===== CHAT MESSAGES ===== */
 .msg {
-  padding: 10px 14px; border-radius: 14px;
-  margin-bottom: 8px; font-size: 13px; line-height: 1.5;
+  padding: 8px 12px; border-radius: 12px;
+  margin-bottom: 6px; font-size: 12px; line-height: 1.45;
   max-width: 88%; clear: both;
 }
-.msg-bot { color: #fff; border-radius: 14px 14px 14px 4px; float: left; }
+.msg-bot { color: #fff; border-radius: 12px 12px 12px 4px; float: left; }
 .msg-user {
   background: #edf0f7; color: #2d3748;
-  border-radius: 14px 14px 4px 14px; float: right;
+  border-radius: 12px 12px 4px 12px; float: right;
 }
 .msg-clear { clear: both; height: 0; }
 
 /* ===== SOCIAL CARDS ===== */
 .s-card {
-  border: 1px solid #e8ecf1; border-radius: 12px;
-  padding: 13px; margin-bottom: 10px;
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
 }
-.s-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.s-head { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
 .s-av {
-  width: 34px; height: 34px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 15px; color: #fff; line-height: 1; flex-shrink: 0;
+  font-size: 13px; color: #fff; line-height: 1; flex-shrink: 0;
 }
-.s-name { font-size: 13px; font-weight: 600; color: #2d3748; display: block; }
-.s-time { font-size: 10.5px; color: #a0aec0; display: block; }
+.s-name { font-size: 12px; font-weight: 600; color: #2d3748; display: block; }
+.s-time { font-size: 10px; color: #a0aec0; display: block; }
 .s-badge {
-  display: inline-block; padding: 2px 7px; border-radius: 10px;
-  font-size: 10px; font-weight: 600;
+  display: inline-block; padding: 1px 6px; border-radius: 8px;
+  font-size: 9px; font-weight: 600;
 }
-.s-text { font-size: 13px; color: #4a5568; line-height: 1.5; margin-bottom: 7px; display: block; }
-.s-engage { display: flex; gap: 12px; font-size: 11.5px; color: #a0aec0; }
+.s-text { font-size: 11.5px; color: #4a5568; line-height: 1.4; margin-bottom: 4px; display: block; }
+.s-engage { display: flex; gap: 10px; font-size: 10px; color: #a0aec0; }
 
 /* ===== REMINDER CARDS ===== */
 .r-card {
-  border: 1px solid #e8ecf1; border-radius: 12px;
-  padding: 12px 14px; margin-bottom: 10px;
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 9px 12px; margin-bottom: 8px;
 }
 .r-status {
-  display: inline-block; padding: 2px 9px; border-radius: 10px;
-  font-size: 10.5px; font-weight: 600; margin-bottom: 4px;
+  display: inline-block; padding: 1px 7px; border-radius: 8px;
+  font-size: 9.5px; font-weight: 600; margin-bottom: 2px;
 }
-.r-name { font-size: 14px; font-weight: 600; color: #2d3748; display: block; margin: 4px 0 2px; }
-.r-info { font-size: 11.5px; color: #718096; display: block; line-height: 1.4; }
+.r-name { font-size: 12.5px; font-weight: 600; color: #2d3748; display: block; margin: 2px 0 1px; }
+.r-info { font-size: 10.5px; color: #718096; display: block; line-height: 1.35; }
 
 /* ===== QUOTE ROWS ===== */
 .q-row {
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 13.5px; padding: 6px 0;
+  font-size: 12px; padding: 5px 0;
 }
 .q-lbl { color: #718096; }
 .q-val { font-weight: 600; color: #2d3748; }
-.q-total { border-top: 2px solid #e8ecf1; margin-top: 6px; padding-top: 8px; }
+.q-total { border-top: 2px solid #e8ecf1; margin-top: 4px; padding-top: 6px; }
 
 /* Action buttons */
-.act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
 .act-btn {
-  padding: 10px; border-radius: 8px; text-align: center;
-  font-size: 13px; font-weight: 600; cursor: pointer;
+  padding: 8px; border-radius: 7px; text-align: center;
+  font-size: 12px; font-weight: 600; cursor: pointer;
 }
 
 /* ===== COLOR THEMES ===== */
@@ -230,23 +228,23 @@ body { padding: 0 20px 20px; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 800px) {
-  .panel.active { grid-template-columns: 1fr; min-height: auto; }
+  .panel.active { grid-template-columns: 1fr; }
   .tabs { grid-template-columns: repeat(2, 1fr); }
-  .tab-label { font-size: 16px; }
-  .left { padding: 24px 20px; }
-  .right { padding: 20px 16px; }
-  .left h3 { font-size: 20px; }
-  .left-sub { font-size: 14px; }
-  .benefit { font-size: 14px; }
-}
-@media (max-width: 480px) {
-  body { padding: 0 12px 12px; }
-  .tabs { gap: 8px; margin-bottom: 16px; }
-  .tab { padding: 10px 8px; border-radius: 12px; }
   .tab-label { font-size: 14px; }
-  .left { padding: 20px 16px; }
+  .left { padding: 20px 18px; }
+  .right { padding: 16px 14px; }
   .left h3 { font-size: 18px; }
   .left-sub { font-size: 13px; }
+  .benefit { font-size: 12.5px; }
+}
+@media (max-width: 480px) {
+  body { padding: 8px 10px 8px; }
+  .tabs { gap: 6px; margin-bottom: 10px; }
+  .tab { padding: 6px 6px 8px; border-radius: 10px; }
+  .tab-label { font-size: 13px; }
+  .left { padding: 16px 14px; }
+  .left h3 { font-size: 16px; }
+  .left-sub { font-size: 12px; }
 }
 </style>
 </head>
@@ -277,19 +275,19 @@ body { padding: 0 20px 20px; }
 <!-- TABS -->
 <div class="tabs" id="tabs">
   <div class="tab active" data-i="0">
-    <span class="tab-icon"><svg width="28" height="28" style="color:#fff;"><use href="#ico-chat"/></svg></span>
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-chat"/></svg></span>
     <span class="tab-label">Chatbot</span>
   </div>
   <div class="tab" data-i="1">
-    <span class="tab-icon"><svg width="28" height="28" style="color:#fff;"><use href="#ico-social"/></svg></span>
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-social"/></svg></span>
     <span class="tab-label">Social Media</span>
   </div>
   <div class="tab" data-i="2">
-    <span class="tab-icon"><svg width="28" height="28" style="color:#fff;"><use href="#ico-calendar"/></svg></span>
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-calendar"/></svg></span>
     <span class="tab-label">No-Show</span>
   </div>
   <div class="tab" data-i="3">
-    <span class="tab-icon"><svg width="28" height="28" style="color:#fff;"><use href="#ico-doc"/></svg></span>
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-doc"/></svg></span>
     <span class="tab-label">Offertes</span>
   </div>
 </div>
@@ -300,22 +298,22 @@ body { padding: 0 20px 20px; }
   <!-- ========== CHATBOT ========== -->
   <div class="panel active" data-p="0">
     <div class="left theme-blue">
-      <div class="left-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-chat"/></svg></div>
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-chat"/></svg></div>
       <h3>Slimme Chatbot & FAQ-Assistent</h3>
       <p class="left-sub">Beantwoord klantvragen 24/7 automatisch</p>
       <ul class="benefits">
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Beantwoordt veelgestelde vragen direct en accuraat</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Draait 24/7 zonder extra personeel of overwerk</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Verzamelt automatisch contactgegevens voor opvolging</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Integreert naadloos met je website en social media</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Leert continu bij en wordt steeds slimmer</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Beantwoordt veelgestelde vragen direct en accuraat</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Draait 24/7 zonder extra personeel of overwerk</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Verzamelt automatisch contactgegevens voor opvolging</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Integreert naadloos met je website en social media</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Leert continu bij en wordt steeds slimmer</span></li>
       </ul>
       <a class="cta" href="javascript:void(0)" onclick="window.top.location.hash='contact'">Ja, dat wil ik ook!</a>
     </div>
     <div class="right">
       <div class="mockup">
         <div class="mock-head theme-blue">
-          <div class="mock-av"><svg width="16" height="16" style="color:#fff;"><use href="#ico-bot"/></svg></div>
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-bot"/></svg></div>
           <div><span class="mock-name">DigiBuur Assistent</span><span class="mock-sub">Online — antwoordt direct</span></div>
         </div>
         <div class="mock-body">
@@ -327,7 +325,7 @@ body { padding: 0 20px 20px; }
           <div class="msg-clear"></div>
           <div class="msg msg-user">Ja graag, morgen om 14:00?</div>
           <div class="msg-clear"></div>
-          <div class="msg msg-bot theme-blue">Genoteerd! Uw afspraak staat ingepland voor morgen 14:00. U ontvangt een bevestiging per e-mail. 📧</div>
+          <div class="msg msg-bot theme-blue">Genoteerd! Uw afspraak staat ingepland voor morgen 14:00. U ontvangt een bevestiging per e-mail.</div>
           <div class="msg-clear"></div>
         </div>
       </div>
@@ -337,28 +335,28 @@ body { padding: 0 20px 20px; }
   <!-- ========== SOCIAL MEDIA ========== -->
   <div class="panel" data-p="1">
     <div class="left theme-purple">
-      <div class="left-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-social"/></svg></div>
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-social"/></svg></div>
       <h3>Social Media & Content Assistent</h3>
       <p class="left-sub">Automatiseer je volledige social media aanwezigheid</p>
       <ul class="benefits">
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Genereert automatisch posts afgestemd op jouw merk</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Plant en publiceert op Instagram, Facebook & LinkedIn</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Reageert automatisch op reacties en DM's</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Analyseert prestaties en optimaliseert je strategie</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Creëert visuele content met AI-gegenereerde afbeeldingen</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Genereert automatisch posts afgestemd op jouw merk</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Plant en publiceert op Instagram, Facebook & LinkedIn</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Reageert automatisch op reacties en DM's</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Analyseert prestaties en optimaliseert je strategie</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Creëert visuele content met AI-gegenereerde afbeeldingen</span></li>
       </ul>
       <a class="cta" href="javascript:void(0)" onclick="window.top.location.hash='contact'">Ja, dat wil ik ook!</a>
     </div>
     <div class="right">
       <div class="mockup">
         <div class="mock-head theme-purple">
-          <div class="mock-av"><svg width="16" height="16" style="color:#fff;"><use href="#ico-social"/></svg></div>
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-social"/></svg></div>
           <div><span class="mock-name">Content Planner</span><span class="mock-sub">3 posts gepland deze week</span></div>
         </div>
         <div class="mock-body">
           <div class="s-card">
             <div class="s-head">
-              <div class="s-av" style="background:#E1306C;"><svg width="15" height="15" style="color:#fff;"><use href="#ico-social"/></svg></div>
+              <div class="s-av" style="background:#E1306C;"><svg width="13" height="13" style="color:#fff;"><use href="#ico-social"/></svg></div>
               <div>
                 <span class="s-name">Instagram</span>
                 <span class="s-time">Vandaag, 10:00 — <span class="s-badge" style="background:#dcfce7;color:#16a34a;">Geplaatst</span></span>
@@ -379,7 +377,7 @@ body { padding: 0 20px 20px; }
           </div>
           <div class="s-card">
             <div class="s-head">
-              <div class="s-av" style="background:#1877F2;"><span style="font-weight:700;font-size:16px;">f</span></div>
+              <div class="s-av" style="background:#1877F2;"><span style="font-weight:700;font-size:14px;">f</span></div>
               <div>
                 <span class="s-name">Facebook</span>
                 <span class="s-time">Woensdag, 14:00 — <span class="s-badge" style="background:#f3e8ff;color:#7c3aed;">Gepland</span></span>
@@ -395,22 +393,22 @@ body { padding: 0 20px 20px; }
   <!-- ========== NO-SHOW ========== -->
   <div class="panel" data-p="2">
     <div class="left theme-green">
-      <div class="left-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-calendar"/></svg></div>
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-calendar"/></svg></div>
       <h3>No-Show Preventie & Herinneringen</h3>
       <p class="left-sub">Verminder gemiste afspraken met slimme herinneringen</p>
       <ul class="benefits">
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatische herinneringen via SMS en WhatsApp</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Patiënten bevestigen of verzetten met één klik</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Vrijgekomen plekken direct aangeboden aan wachtlijst</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Koppelt met je bestaande agenda en praktijksoftware</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Volledig AVG-compliant en veilig</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatische herinneringen via SMS en WhatsApp</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Patiënten bevestigen of verzetten met één klik</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Vrijgekomen plekken direct aangeboden aan wachtlijst</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Koppelt met je bestaande agenda en praktijksoftware</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Volledig AVG-compliant en veilig</span></li>
       </ul>
       <a class="cta" href="javascript:void(0)" onclick="window.top.location.hash='contact'">Ja, dat wil ik ook!</a>
     </div>
     <div class="right">
       <div class="mockup">
         <div class="mock-head theme-green">
-          <div class="mock-av"><svg width="16" height="16" style="color:#fff;"><use href="#ico-calendar"/></svg></div>
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-calendar"/></svg></div>
           <div><span class="mock-name">Afspraken Overzicht</span><span class="mock-sub">Vandaag — 8 afspraken</span></div>
         </div>
         <div class="mock-body">
@@ -442,26 +440,26 @@ body { padding: 0 20px 20px; }
   <!-- ========== OFFERTES ========== -->
   <div class="panel" data-p="3">
     <div class="left theme-orange">
-      <div class="left-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-doc"/></svg></div>
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-doc"/></svg></div>
       <h3>Offertesysteem + Opvolging</h3>
       <p class="left-sub">Genereer professionele offertes in seconden</p>
       <ul class="benefits">
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Genereer professionele offertes met één klik</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatische follow-up als offerte niet is bekeken</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Online acceptatie met digitale handtekening</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Real-time notificaties wanneer klant de offerte opent</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="11" height="11" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Inzicht in conversieratio's en opvolgmomenten</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Genereer professionele offertes met één klik</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatische follow-up als offerte niet is bekeken</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Online acceptatie met digitale handtekening</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Real-time notificaties wanneer klant de offerte opent</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Inzicht in conversieratio's en opvolgmomenten</span></li>
       </ul>
       <a class="cta" href="javascript:void(0)" onclick="window.top.location.hash='contact'">Ja, dat wil ik ook!</a>
     </div>
     <div class="right">
       <div class="mockup">
         <div class="mock-head theme-orange">
-          <div class="mock-av"><svg width="16" height="16" style="color:#fff;"><use href="#ico-doc"/></svg></div>
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-doc"/></svg></div>
           <div><span class="mock-name">Offerte #2024-156</span><span class="mock-sub">Verstuurd aan Bakkerij van Dijk</span></div>
         </div>
         <div class="mock-body">
-          <div style="margin-bottom:12px;">
+          <div style="margin-bottom:8px;">
             <span class="r-status" style="background:#dcfce7;color:#16a34a;">Bekeken — 3 min geleden</span>
           </div>
           <div class="q-row"><span class="q-lbl">Website ontwikkeling</span><span class="q-val">€2.500</span></div>
@@ -470,7 +468,7 @@ body { padding: 0 20px 20px; }
           <div class="q-row"><span class="q-lbl">Content creatie (3 mnd)</span><span class="q-val">€600</span></div>
           <div class="q-row q-total">
             <span style="font-weight:700;color:#2d3748;">Totaal</span>
-            <span style="font-weight:700;color:#f97316;font-size:17px;">€4.300</span>
+            <span style="font-weight:700;color:#f97316;font-size:15px;">€4.300</span>
           </div>
           <div class="act-btns">
             <div class="act-btn" style="background:#f97316;color:#fff;">Accepteren</div>
