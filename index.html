@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiBuur AI Cases</title>
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body { padding: 0 20px 20px; }
+
+/* ===== TABS ROW ===== */
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tab {
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 22px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255,255,255,0.5);
+  user-select: none;
+}
+.tab:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+.tab.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: transparent;
+  color: #fff;
+  transform: scale(1.04);
+  box-shadow: 0 8px 28px rgba(102,126,234,0.35);
+}
+.tab-icon { font-size: 30px; display: block; margin-bottom: 8px; line-height: 1; }
+.tab-label { font-size: 17px; font-weight: 700; display: block; line-height: 1.2; }
+
+/* ===== CARD ===== */
+.card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+}
+
+/* ===== PANELS ===== */
+.panel {
+  display: none;
+}
+.panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  animation: fadeIn 0.35s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== LEFT SIDE ===== */
+.left {
+  padding: 44px 40px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.left-icon {
+  width: 54px; height: 54px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 20px; line-height: 1;
+}
+.left h3 {
+  font-size: 25px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; color: #fff;
+}
+.left-desc {
+  font-size: 15px; line-height: 1.6; opacity: 0.88; margin-bottom: 22px; color: #fff;
+}
+
+/* Stats */
+.stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+}
+.stat {
+  background: rgba(255,255,255,0.14);
+  border-radius: 12px; padding: 14px; text-align: center;
+}
+.stat-val { font-size: 24px; font-weight: 800; display: block; line-height: 1.2; color: #fff; }
+.stat-lbl { font-size: 11px; opacity: 0.75; display: block; margin-top: 2px; color: #fff; }
+
+/* Benefits list */
+.benefits { list-style: none; margin-bottom: 26px; }
+.benefit {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 12px; font-size: 14px; line-height: 1.55; color: #fff;
+}
+.benefit-check {
+  flex-shrink: 0; width: 21px; height: 21px;
+  background: rgba(255,255,255,0.18); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; margin-top: 1px; color: #fff;
+}
+
+/* CTA */
+.cta {
+  display: block; width: 100%;
+  background: #fff; color: #1a1a2e;
+  padding: 15px; border-radius: 999px;
+  font-size: 16px; font-weight: 700; text-align: center;
+  text-decoration: none; border: none; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: all 0.25s ease; margin-top: auto;
+}
+.cta:hover { background: #f0f0f5; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+
+/* ===== RIGHT SIDE (MOCKUP) ===== */
+.right {
+  background: #f5f7fa;
+  padding: 36px 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+.mockup {
+  width: 100%; max-width: 370px;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  background: #fff;
+}
+.mock-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 18px; color: #fff;
+}
+.mock-av {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.25); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; line-height: 1;
+}
+.mock-name { font-size: 13px; font-weight: 600; color: #fff; display: block; }
+.mock-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
+.mock-body { padding: 16px; background: #fff; }
+
+/* ===== CHAT MESSAGES ===== */
+.msg {
+  padding: 10px 14px; border-radius: 14px;
+  margin-bottom: 8px; font-size: 12.5px; line-height: 1.55;
+  max-width: 88%; clear: both;
+}
+.msg-bot { color: #fff; border-radius: 14px 14px 14px 4px; float: left; }
+.msg-user {
+  background: #edf0f7; color: #2d3748;
+  border-radius: 14px 14px 4px 14px; float: right;
+}
+.msg-clear { clear: both; height: 0; }
+
+/* ===== SOCIAL CARDS ===== */
+.s-card {
+  border: 1px solid #e8ecf1; border-radius: 12px;
+  padding: 14px; margin-bottom: 10px;
+}
+.s-head { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.s-av {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #fff; line-height: 1; flex-shrink: 0;
+}
+.s-name { font-size: 12.5px; font-weight: 600; color: #2d3748; display: block; }
+.s-time { font-size: 10px; color: #a0aec0; display: block; }
+.s-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 10px; font-weight: 600;
+}
+.s-text { font-size: 12.5px; color: #4a5568; line-height: 1.55; margin-bottom: 8px; display: block; }
+.s-engage { display: flex; gap: 14px; font-size: 11px; color: #a0aec0; }
+
+/* ===== REMINDER CARDS ===== */
+.r-card {
+  border: 1px solid #e8ecf1; border-radius: 12px;
+  padding: 13px 15px; margin-bottom: 10px;
+}
+.r-status {
+  display: inline-block; padding: 2px 9px; border-radius: 10px;
+  font-size: 10px; font-weight: 600; margin-bottom: 5px;
+}
+.r-name { font-size: 13.5px; font-weight: 600; color: #2d3748; display: block; margin: 4px 0 3px; }
+.r-info { font-size: 11px; color: #718096; display: block; line-height: 1.4; }
+
+/* ===== QUOTE ROWS ===== */
+.q-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; padding: 6px 0;
+}
+.q-lbl { color: #718096; }
+.q-val { font-weight: 600; color: #2d3748; }
+.q-total { border-top: 2px solid #e8ecf1; margin-top: 8px; padding-top: 10px; }
+
+/* Action buttons */
+.act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+.act-btn {
+  padding: 10px; border-radius: 8px; text-align: center;
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+
+/* ===== COLOR THEMES ===== */
+.theme-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.theme-purple { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+.theme-green { background: linear-gradient(135deg, #10b981, #059669); }
+.theme-orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 800px) {
+  .panel.active { grid-template-columns: 1fr; }
+  .tabs { grid-template-columns: repeat(2, 1fr); }
+  .tab-label { font-size: 14px; }
+  .left { padding: 32px 24px; }
+  .right { padding: 24px 20px; }
+  .left h3 { font-size: 22px; }
+}
+@media (max-width: 480px) {
+  body { padding: 0 12px 12px; }
+  .tabs { gap: 8px; margin-bottom: 20px; }
+  .tab { padding: 16px 8px; border-radius: 12px; }
+  .tab-icon { font-size: 24px; }
+  .tab-label { font-size: 13px; }
+  .left { padding: 24px 20px; }
+  .left h3 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TABS -->
+<div class="tabs" id="tabs">
+  <div class="tab active" data-i="0">
+    <span class="tab-icon">💬</span>
+    <span class="tab-label">Chatbot</span>
+  </div>
+  <div class="tab" data-i="1">
+    <span class="tab-icon">📱</span>
+    <span class="tab-label">Social Media</span>
+  </div>
+  <div class="tab" data-i="2">
+    <span class="tab-icon">📅</span>
+    <span class="tab-label">No-Show</span>
+  </div>
+  <div class="tab" data-i="3">
+    <span class="tab-icon">📄</span>
+    <span class="tab-label">Offertes</span>
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="card">
+
+  <!-- ========== CHATBOT ========== -->
+  <div class="panel active" data-p="0">
+    <div class="left theme-blue">
+      <div class="left-icon">💬</div>
+      <h3>Slimme Chatbot & FAQ-Assistent</h3>
+      <p class="left-desc">Jouw digitale medewerker die 24/7 klantvragen beantwoordt, afspraken inplant en leads verzamelt — zonder dat jij er naar om hoeft te kijken.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">24/7</span><span class="stat-lbl">Altijd bereikbaar</span></div>
+        <div class="stat"><span class="stat-val">80%</span><span class="stat-lbl">Vragen direct beantwoord</span></div>
+      </div>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check">✓</span><span>Beantwoordt veelgestelde vragen direct en accuraat</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Draait 24/7 zonder extra personeel of overwerk</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Verzamelt automatisch contactgegevens voor opvolging</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Integreert naadloos met je website en social media</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Leert continu bij en wordt steeds slimmer</span></li>
+      </ul>
+      <a href="#contact" class="cta" target="_parent">Ja, dat wil ik ook!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-blue">
+          <div class="mock-av">🤖</div>
+          <div><span class="mock-name">DigiBuur Assistent</span><span class="mock-sub">Online — antwoordt direct</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="msg msg-bot theme-blue">Welkom! Ik ben de digitale assistent. Waarmee kan ik u helpen?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-user">Wat zijn jullie openingstijden?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-blue">We zijn bereikbaar ma-vr van 9:00 tot 17:00 uur. Wilt u direct een afspraak inplannen?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-user">Ja graag, morgen om 14:00?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-blue">Genoteerd! Uw afspraak staat ingepland voor morgen 14:00. U ontvangt een bevestiging per e-mail. 📧</div>
+          <div class="msg-clear"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SOCIAL MEDIA ========== -->
+  <div class="panel" data-p="1">
+    <div class="left theme-purple">
+      <div class="left-icon">📱</div>
+      <h3>Social Media & Content Assistent</h3>
+      <p class="left-desc">Automatiseer je volledige social media aanwezigheid. Van contentcreatie tot planning en analyse — alles op de automatische piloot.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">5x</span><span class="stat-lbl">Meer content output</span></div>
+        <div class="stat"><span class="stat-val">10+</span><span class="stat-lbl">Uur/week bespaard</span></div>
+      </div>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check">✓</span><span>Genereert automatisch posts afgestemd op jouw merk</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Plant en publiceert op Instagram, Facebook & LinkedIn</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Reageert automatisch op reacties en DM's</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Analyseert prestaties en optimaliseert je strategie</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Creëert visuele content met AI-gegenereerde afbeeldingen</span></li>
+      </ul>
+      <a href="#contact" class="cta" target="_parent">Ja, dat wil ik ook!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-purple">
+          <div class="mock-av">📊</div>
+          <div><span class="mock-name">Content Planner</span><span class="mock-sub">3 posts gepland deze week</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-av" style="background:#E1306C;">📸</div>
+              <div>
+                <span class="s-name">Instagram</span>
+                <span class="s-time">Vandaag, 10:00 — <span class="s-badge" style="background:#dcfce7;color:#16a34a;">Geplaatst ✓</span></span>
+              </div>
+            </div>
+            <span class="s-text">🚀 Nieuw project afgerond! Trotse lancering van de website voor een lokale bakkerij. #webdesign #mkb</span>
+            <div class="s-engage"><span>❤️ 47</span><span>💬 12</span><span>🔄 8</span></div>
+          </div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-av" style="background:#0077B5;">in</div>
+              <div>
+                <span class="s-name">LinkedIn</span>
+                <span class="s-time">Morgen, 09:00 — <span class="s-badge" style="background:#f3e8ff;color:#7c3aed;">Gepland</span></span>
+              </div>
+            </div>
+            <span class="s-text">💡 5 manieren waarop AI jouw praktijk kan transformeren. Lees onze nieuwste blog...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NO-SHOW ========== -->
+  <div class="panel" data-p="2">
+    <div class="left theme-green">
+      <div class="left-icon">📅</div>
+      <h3>No-Show Preventie & Herinneringen</h3>
+      <p class="left-desc">Verminder gemiste afspraken drastisch met slimme, automatische herinneringen via SMS en WhatsApp. Vul vrijgekomen plekken direct weer op.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">-70%</span><span class="stat-lbl">Minder no-shows</span></div>
+        <div class="stat"><span class="stat-val">95%</span><span class="stat-lbl">Bevestigingsgraad</span></div>
+      </div>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check">✓</span><span>Automatische herinneringen via SMS en WhatsApp</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Patiënten bevestigen of verzetten met één klik</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Vrijgekomen plekken direct aangeboden aan wachtlijst</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Koppelt met je bestaande agenda en praktijksoftware</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Volledig AVG-compliant en veilig</span></li>
+      </ul>
+      <a href="#contact" class="cta" target="_parent">Ja, dat wil ik ook!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-green">
+          <div class="mock-av">📋</div>
+          <div><span class="mock-name">Afspraken Overzicht</span><span class="mock-sub">Vandaag — 8 afspraken</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="r-card">
+            <span class="r-status" style="background:#dcfce7;color:#16a34a;">✓ Bevestigd</span>
+            <span class="r-name">J. de Vries — Controle</span>
+            <span class="r-info">Morgen 14:00 | Herinnering verstuurd via WhatsApp</span>
+          </div>
+          <div class="r-card">
+            <span class="r-status" style="background:#fef3c7;color:#d97706;">⏳ Wacht op bevestiging</span>
+            <span class="r-name">M. Bakker — Behandeling</span>
+            <span class="r-info">Morgen 15:30 | SMS verstuurd 2 uur geleden</span>
+          </div>
+          <div class="r-card">
+            <span class="r-status" style="background:#fee2e2;color:#dc2626;">✕ Geannuleerd</span>
+            <span class="r-name">P. Jansen — Consult</span>
+            <span class="r-info">Morgen 16:00 | <span style="color:#16a34a;font-weight:600;">Wachtlijst genotificeerd</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OFFERTES ========== -->
+  <div class="panel" data-p="3">
+    <div class="left theme-orange">
+      <div class="left-icon">📄</div>
+      <h3>Offertesysteem + Opvolging</h3>
+      <p class="left-desc">Genereer professionele offertes in seconden, volg ze automatisch op en laat klanten digitaal tekenen. Verhoog je conversie zonder extra werk.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">+35%</span><span class="stat-lbl">Hogere conversie</span></div>
+        <div class="stat"><span class="stat-val">2 min</span><span class="stat-lbl">Offerte aanmaken</span></div>
+      </div>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check">✓</span><span>Genereer professionele offertes met één klik</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Automatische follow-up als offerte niet is bekeken</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Online acceptatie met digitale handtekening</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Real-time notificaties wanneer klant de offerte opent</span></li>
+        <li class="benefit"><span class="benefit-check">✓</span><span>Inzicht in conversieratio's en opvolgmomenten</span></li>
+      </ul>
+      <a href="#contact" class="cta" target="_parent">Ja, dat wil ik ook!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-orange">
+          <div class="mock-av">📄</div>
+          <div><span class="mock-name">Offerte #2024-156</span><span class="mock-sub">Verstuurd aan Bakkerij van Dijk</span></div>
+        </div>
+        <div class="mock-body">
+          <div style="margin-bottom:12px;">
+            <span class="r-status" style="background:#dcfce7;color:#16a34a;">👁 Bekeken — 3 min geleden</span>
+          </div>
+          <div class="q-row"><span class="q-lbl">Website ontwikkeling</span><span class="q-val">€2.500</span></div>
+          <div class="q-row"><span class="q-lbl">SEO pakket (6 mnd)</span><span class="q-val">€750</span></div>
+          <div class="q-row"><span class="q-lbl">Social media setup</span><span class="q-val">€450</span></div>
+          <div class="q-row q-total">
+            <span style="font-weight:700;color:#2d3748;">Totaal</span>
+            <span style="font-weight:700;color:#f97316;font-size:17px;">€3.700</span>
+          </div>
+          <div class="act-btns">
+            <div class="act-btn" style="background:#f97316;color:#fff;">✓ Accepteren</div>
+            <div class="act-btn" style="border:2px solid #e2e8f0;color:#718096;">Vraag stellen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+
+  function switchTo(idx) {
+    tabs.forEach(function(t, i) {
+      t.classList.toggle('active', i === idx);
+    });
+    panels.forEach(function(p, i) {
+      p.classList.toggle('active', i === idx);
+    });
+    // Tell parent iframe to resize
+    requestAnimationFrame(function() {
+      if (window.parent !== window) {
+        window.parent.postMessage({
+          type: 'digibuur-resize',
+          height: document.body.scrollHeight
+        }, '*');
+      }
+    });
+  }
+
+  tabs.forEach(function(tab, i) {
+    tab.addEventListener('click', function() { switchTo(i); });
+    tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
+  });
+
+  // Initial resize message
+  window.addEventListener('load', function() {
+    if (window.parent !== window) {
+      window.parent.postMessage({
+        type: 'digibuur-resize',
+        height: document.body.scrollHeight
+      }, '*');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
