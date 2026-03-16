@@ -1,1 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiBuur AI Cases</title>
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body { padding: 10px 20px 10px; }
 
+/* ===== SVG ICONS ===== */
+.ico { display: inline-block; vertical-align: middle; }
+.ico svg { display: block; }
+
+/* ===== TABS ROW ===== */
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tab {
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 8px 8px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255,255,255,0.5);
+  user-select: none;
+}
+.tab:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+.tab.active {
+  border-color: transparent;
+  color: #fff;
+  transform: scale(1.03);
+}
+/* Tab active colors match left card */
+.tab.active[data-i="0"] { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 6px 20px rgba(59,130,246,0.35); }
+.tab.active[data-i="1"] { background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 6px 20px rgba(168,85,247,0.35); }
+.tab.active[data-i="2"] { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
+.tab.active[data-i="3"] { background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 6px 20px rgba(249,115,22,0.35); }
+
+.tab-icon { display: block; margin: 0 auto 3px; }
+.tab-icon svg { margin: 0 auto; }
+.tab-label { font-size: 16px; font-weight: 700; display: block; line-height: 1.2; color: #F5F5F5; }
+
+/* ===== CARD ===== */
+.card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ===== PANELS ===== */
+.panel { display: none; }
+.panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  animation: fadeIn 0.35s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== LEFT SIDE ===== */
+.left {
+  padding: 22px 26px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.left-icon {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px;
+}
+.left-icon svg { width: 20px; height: 20px; }
+.left h3 {
+  font-size: 20px; font-weight: 800; margin-bottom: 5px; line-height: 1.25; color: #fff;
+}
+.left-sub {
+  font-size: 13.5px; font-weight: 600; opacity: 0.9; margin-bottom: 12px; color: #fff; line-height: 1.35;
+}
+
+/* Benefits list */
+.benefits { list-style: none; margin-bottom: 14px; }
+.benefit {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-bottom: 6px; font-size: 13px; line-height: 1.4; color: #fff;
+}
+.benefit-check {
+  flex-shrink: 0; width: 18px; height: 18px;
+  background: rgba(255,255,255,0.2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.benefit-check svg { width: 10px; height: 10px; }
+
+/* CTA Button - DigiBuur huisstijl */
+.cta {
+  display: block; width: 100%;
+  background: linear-gradient(38deg, #301363, #08328570);
+  color: #F5F5F5;
+  padding: 11px; border-radius: 10px;
+  font-size: 14px; font-weight: 700; text-align: center;
+  text-decoration: none; border: 1px solid #748AB5; cursor: pointer;
+  transition: all 0.25s ease; margin-top: auto;
+}
+.cta:hover { background: linear-gradient(38deg, #4a1d8e, #0a3fa0); border-color: #94a8d0; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(48,19,99,0.35); }
+
+/* ===== RIGHT SIDE (MOCKUP) ===== */
+.right {
+  padding: 20px;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+/* Right side background matches theme with light tint */
+.panel[data-p="0"] .right { background: linear-gradient(135deg, #eef4ff, #dbeafe); }
+.panel[data-p="1"] .right { background: linear-gradient(135deg, #f5f0ff, #ede9fe); }
+.panel[data-p="2"] .right { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+.panel[data-p="3"] .right { background: linear-gradient(135deg, #fff7ed, #ffedd5); }
+
+.mockup {
+  width: 100%; max-width: 420px;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  background: #fff;
+}
+.mock-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; color: #fff;
+}
+.mock-av {
+  width: 28px; height: 28px;
+  background: rgba(255,255,255,0.25); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.mock-av svg { width: 14px; height: 14px; }
+.mock-name { font-size: 12.5px; font-weight: 600; color: #fff; display: block; }
+.mock-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
+.mock-body { padding: 12px 14px; background: #fff; }
+
+/* ===== CHAT MESSAGES ===== */
+.msg {
+  padding: 8px 12px; border-radius: 12px;
+  margin-bottom: 6px; font-size: 12px; line-height: 1.45;
+  max-width: 88%; clear: both;
+}
+.msg-bot { color: #fff; border-radius: 12px 12px 12px 4px; float: left; }
+.msg-user {
+  background: #edf0f7; color: #2d3748;
+  border-radius: 12px 12px 4px 12px; float: right;
+}
+.msg-clear { clear: both; height: 0; }
+
+/* ===== SOCIAL CARDS ===== */
+.s-card {
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.s-head { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.s-av {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: #fff; line-height: 1; flex-shrink: 0;
+}
+.s-name { font-size: 12px; font-weight: 600; color: #2d3748; display: block; }
+.s-time { font-size: 10px; color: #a0aec0; display: block; }
+.s-badge {
+  display: inline-block; padding: 1px 6px; border-radius: 8px;
+  font-size: 9px; font-weight: 600;
+}
+.s-text { font-size: 11.5px; color: #4a5568; line-height: 1.4; margin-bottom: 4px; display: block; }
+.s-engage { display: flex; gap: 10px; font-size: 10px; color: #a0aec0; }
+
+/* ===== REMINDER CARDS ===== */
+.r-card {
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 9px 12px; margin-bottom: 8px;
+}
+.r-status {
+  display: inline-block; padding: 1px 7px; border-radius: 8px;
+  font-size: 9.5px; font-weight: 600; margin-bottom: 2px;
+}
+.r-name { font-size: 12.5px; font-weight: 600; color: #2d3748; display: block; margin: 2px 0 1px; }
+.r-info { font-size: 10.5px; color: #718096; display: block; line-height: 1.35; }
+
+/* ===== QUOTE ROWS ===== */
+.q-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; padding: 5px 0;
+}
+.q-lbl { color: #718096; }
+.q-val { font-weight: 600; color: #2d3748; }
+.q-total { border-top: 2px solid #e8ecf1; margin-top: 4px; padding-top: 6px; }
+
+/* Action buttons */
+.act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.act-btn {
+  padding: 8px; border-radius: 7px; text-align: center;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+}
+
+/* ===== COLOR THEMES ===== */
+.theme-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.theme-purple { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+.theme-green { background: linear-gradient(135deg, #10b981, #059669); }
+.theme-orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 800px) {
+  .panel.active { grid-template-columns: 1fr; }
+  .tabs { grid-template-columns: repeat(2, 1fr); }
+  .tab-label { font-size: 14px; }
+  .left { padding: 20px 18px; }
+  .right { padding: 16px 14px; }
+  .left h3 { font-size: 18px; }
+  .left-sub { font-size: 13px; }
+  .benefit { font-size: 12.5px; }
+}
+@media (max-width: 480px) {
+  body { padding: 8px 10px 8px; }
+  .tabs { gap: 6px; margin-bottom: 10px; }
+  .tab { padding: 6px 6px 8px; border-radius: 10px; }
+  .tab-label { font-size: 13px; }
+  .left { padding: 16px 14px; }
+  .left h3 { font-size: 16px; }
+  .left-sub { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG icon definitions -->
+<svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </symbol>
+  <symbol id="ico-social" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </symbol>
+  <symbol id="ico-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="10" y2="14.01"/><line x1="14" y1="14" x2="14" y2="14.01"/><line x1="10" y1="18" x2="10" y2="18.01"/>
+  </symbol>
+  <symbol id="ico-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+  </symbol>
+  <symbol id="ico-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </symbol>
+  <symbol id="ico-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/>
+  </symbol>
+</svg>
+
+<!-- TABS -->
+<div class="tabs" id="tabs">
+  <div class="tab active" data-i="0">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-chat"/></svg></span>
+    <span class="tab-label">Chatbot</span>
+  </div>
+  <div class="tab" data-i="1">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-social"/></svg></span>
+    <span class="tab-label">Social Media</span>
+  </div>
+  <div class="tab" data-i="2">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-calendar"/></svg></span>
+    <span class="tab-label">No-Show</span>
+  </div>
+  <div class="tab" data-i="3">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-doc"/></svg></span>
+    <span class="tab-label">Quotes</span>
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="card">
+
+  <!-- ========== CHATBOT ========== -->
+  <div class="panel active" data-p="0">
+    <div class="left theme-blue">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-chat"/></svg></div>
+      <h3>Smart Chatbot & FAQ Assistant</h3>
+      <p class="left-sub">Answers customer questions automatically, 24/7</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Answers frequently asked questions directly and accurately</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Runs 24/7 without extra staff or overtime</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically collects contact details for follow-up</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Integrates seamlessly with your website and social media</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Continuously learns and gets smarter over time</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-blue">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-bot"/></svg></div>
+          <div><span class="mock-name">DigiBuur Assistant</span><span class="mock-sub">Online — replies instantly</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="msg msg-bot theme-blue">Welcome! I’m the digital assistant. How can I help you?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-user">What are your opening hours?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-blue">We’re available Mon–Fri from 9:00 AM to 5:00 PM. Would you like to book an appointment right away?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-user">Yes please, tomorrow at 2:00 PM?</div>
+          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-blue">Noted! Your appointment is scheduled for tomorrow at 2:00 PM. You’ll receive a confirmation by email.</div>
+          <div class="msg-clear"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SOCIAL MEDIA ========== -->
+  <div class="panel" data-p="1">
+    <div class="left theme-purple">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-social"/></svg></div>
+      <h3>Social Media & Content Assistant</h3>
+      <p class="left-sub">Automate your entire social media presence</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically generates posts tailored to your brand</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Schedules and publishes on Instagram, Facebook & LinkedIn</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically replies to comments and DMs</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Analyzes performance and optimizes your strategy</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Creates visual content with AI-generated images</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-purple">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-social"/></svg></div>
+          <div><span class="mock-name">Content Planner</span><span class="mock-sub">3 posts scheduled this week</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-av" style="background:#E1306C;"><svg width="13" height="13" style="color:#fff;"><use href="#ico-social"/></svg></div>
+              <div>
+                <span class="s-name">Instagram</span>
+                <span class="s-time">Today, 10:00 AM — <span class="s-badge" style="background:#dcfce7;color:#16a34a;">Posted</span></span>
+              </div>
+            </div>
+            <span class="s-text">New project completed! Proud launch of a website for a local bakery. #webdesign #smallbusiness</span>
+            <div class="s-engage"><span>47 likes</span><span>12 comments</span><span>8 shares</span></div>
+          </div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-av" style="background:#0077B5;">in</div>
+              <div>
+                <span class="s-name">LinkedIn</span>
+                <span class="s-time">Tomorrow, 09:00 AM — <span class="s-badge" style="background:#f3e8ff;color:#7c3aed;">Scheduled</span></span>
+              </div>
+            </div>
+            <span class="s-text">5 ways AI can transform your practice. Read our latest blog...</span>
+          </div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-av" style="background:#1877F2;"><span style="font-weight:700;font-size:14px;">f</span></div>
+              <div>
+                <span class="s-name">Facebook</span>
+                <span class="s-time">Wednesday, 2:00 PM — <span class="s-badge" style="background:#f3e8ff;color:#7c3aed;">Scheduled</span></span>
+              </div>
+            </div>
+            <span class="s-text">Did you know that 73% of SMEs save time with AI? Discover how we can help you.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NO-SHOW ========== -->
+  <div class="panel" data-p="2">
+    <div class="left theme-green">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-calendar"/></svg></div>
+      <h3>No-Show Prevention & Reminders</h3>
+      <p class="left-sub">Reduce missed appointments with smart reminders</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic reminders via SMS and WhatsApp</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Patients confirm or reschedule with one click</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Open slots are offered directly to your waiting list</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Connects with your existing calendar and practice software</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Fully GDPR-compliant and secure</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-green">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-calendar"/></svg></div>
+          <div><span class="mock-name">Appointments Overview</span><span class="mock-sub">Today — 8 appointments</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="r-card">
+            <span class="r-status" style="background:#dcfce7;color:#16a34a;">Confirmed</span>
+            <span class="r-name">J. de Vries — Check-up</span>
+            <span class="r-info">Tomorrow 2:00 PM | Reminder sent via WhatsApp</span>
+          </div>
+          <div class="r-card">
+            <span class="r-status" style="background:#fef3c7;color:#d97706;">Waiting for confirmation</span>
+            <span class="r-name">M. Bakker — Treatment</span>
+            <span class="r-info">Tomorrow 3:30 PM | SMS sent 2 hours ago</span>
+          </div>
+          <div class="r-card">
+            <span class="r-status" style="background:#fee2e2;color:#dc2626;">Cancelled</span>
+            <span class="r-name">P. Jansen — Consultation</span>
+            <span class="r-info">Tomorrow 4:00 PM | <span style="color:#16a34a;font-weight:600;">Waiting list notified</span></span>
+          </div>
+          <div class="r-card">
+            <span class="r-status" style="background:#dcfce7;color:#16a34a;">Confirmed</span>
+            <span class="r-name">A. Smit — Intake</span>
+            <span class="r-info">Tomorrow 5:00 PM | Reminder sent via SMS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OFFERTES ========== -->
+  <div class="panel" data-p="3">
+    <div class="left theme-orange">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-doc"/></svg></div>
+      <h3>Quote System + Follow-Up</h3>
+      <p class="left-sub">Generate professional quotes in seconds</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Generate professional quotes with one click</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic follow-up if the quote hasn’t been viewed</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Online acceptance with digital signature</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Real-time notifications when the client opens the quote</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Insight into conversion rates and follow-up timing</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-orange">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-doc"/></svg></div>
+          <div><span class="mock-name">Quote #2024-156</span><span class="mock-sub">Sent to Van Dijk Bakery</span></div>
+        </div>
+        <div class="mock-body">
+          <div style="margin-bottom:8px;">
+            <span class="r-status" style="background:#dcfce7;color:#16a34a;">Viewed — 3 min ago</span>
+          </div>
+          <div class="q-row"><span class="q-lbl">Website development</span><span class="q-val">€2.500</span></div>
+          <div class="q-row"><span class="q-lbl">SEO package (6 mo)</span><span class="q-val">€750</span></div>
+          <div class="q-row"><span class="q-lbl">Social media setup</span><span class="q-val">€450</span></div>
+          <div class="q-row"><span class="q-lbl">Content creation (3 mo)</span><span class="q-val">€600</span></div>
+          <div class="q-row q-total">
+            <span style="font-weight:700;color:#2d3748;">Total</span>
+            <span style="font-weight:700;color:#f97316;font-size:15px;">€4.300</span>
+          </div>
+          <div class="act-btns">
+            <div class="act-btn" style="background:#f97316;color:#fff;">Accept</div>
+            <div class="act-btn" style="border:2px solid #e2e8f0;color:#718096;">Ask a question</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+
+  function switchTo(idx) {
+    tabs.forEach(function(t, i) {
+      t.classList.toggle('active', i === idx);
+    });
+    panels.forEach(function(p, i) {
+      p.classList.toggle('active', i === idx);
+    });
+    requestAnimationFrame(function() {
+      if (window.parent !== window) {
+        window.parent.postMessage({
+          type: 'digibuur-resize',
+          height: document.body.scrollHeight
+        }, '*');
+      }
+    });
+  }
+
+  tabs.forEach(function(tab, i) {
+    tab.addEventListener('click', function() { switchTo(i); });
+    tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
+  });
+
+  window.addEventListener('load', function() {
+    if (window.parent !== window) {
+      window.parent.postMessage({
+        type: 'digibuur-resize',
+        height: document.body.scrollHeight
+      }, '*');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
