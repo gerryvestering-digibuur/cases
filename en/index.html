@@ -486,14 +486,13 @@ body { padding: 10px 20px 10px; }
   /* ── Core resize sender ── */
   function sendHeight() {
     if (window.parent === window) return;
-    /* Use scrollHeight of documentElement for most accurate mobile measure */
     var h = Math.max(
       document.body.scrollHeight,
       document.body.offsetHeight,
       document.documentElement.scrollHeight,
       document.documentElement.offsetHeight
     );
-    window.parent.postMessage({ type: 'digibuur-resize', height: h }, '*');
+    window.parent.postMessage({ type: 'digibuur-resize', height: h - 10 }, '*');
   }
 
   /* ── Switch tab ── */
@@ -501,9 +500,13 @@ body { padding: 10px 20px 10px; }
     tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
     panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
 
-    /* Wait for CSS grid reflow (animation + layout), then measure */
-    setTimeout(sendHeight, 50);
-    setTimeout(sendHeight, 200);  /* second pass catches slow reflows on iOS */
+    /* Double rAF: waits for browser to fully layout the new panel before measuring */
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        sendHeight();
+        setTimeout(sendHeight, 150); /* iOS fallback for slow reflows */
+      });
+    });
   }
 
   /* ── Bind clicks + touch ── */
