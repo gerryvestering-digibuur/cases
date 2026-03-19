@@ -51,7 +51,6 @@ body { padding: 10px 20px 10px; }
   color: #fff;
   transform: scale(1.03);
 }
-/* Tab active colors - subtle muted tones */
 .tab.active[data-i="0"] { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); box-shadow: 0 4px 14px rgba(30,58,110,0.3); }
 .tab.active[data-i="1"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
 .tab.active[data-i="2"] { background: linear-gradient(135deg, #0d5c47, #0a7a5a); box-shadow: 0 4px 14px rgba(13,92,71,0.3); }
@@ -132,7 +131,6 @@ body { padding: 10px 20px 10px; }
   padding: 20px;
   display: flex; align-items: flex-start; justify-content: center;
 }
-/* Right side background - softer tints */
 .panel[data-p="0"] .right { background: linear-gradient(135deg, #e8eef8, #d4dff0); }
 .panel[data-p="1"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
 .panel[data-p="2"] .right { background: linear-gradient(135deg, #e2f3ed, #cfe8de); }
@@ -213,17 +211,16 @@ body { padding: 10px 20px 10px; }
 .q-val { font-weight: 600; color: #2d3748; }
 .q-total { border-top: 2px solid #e8ecf1; margin-top: 4px; padding-top: 6px; }
 
-/* Action buttons */
 .act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
 .act-btn {
   padding: 8px; border-radius: 7px; text-align: center;
   font-size: 12px; font-weight: 600; cursor: pointer;
 }
 
-/* ===== COLOR THEMES - muted to match dark site ===== */
-.theme-blue { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
+/* ===== COLOR THEMES ===== */
+.theme-blue   { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
 .theme-purple { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); }
-.theme-green { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
+.theme-green  { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
 .theme-orange { background: linear-gradient(135deg, #8a3e0a, #a04b10); }
 
 /* ===== RESPONSIVE ===== */
@@ -479,43 +476,65 @@ body { padding: 10px 20px 10px; }
     </div>
   </div>
 
-</div>
+</div><!-- /.card -->
 
 <script>
 (function() {
-  var tabs = document.querySelectorAll('.tab');
+  var tabs   = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.panel');
 
+  /* ── Core resize sender ── */
+  function sendHeight() {
+    if (window.parent === window) return;
+    var h = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+    window.parent.postMessage({ type: 'digibuur-resize', height: h - 10 }, '*');
+  }
+
+  /* ── Switch tab ── */
   function switchTo(idx) {
-    tabs.forEach(function(t, i) {
-      t.classList.toggle('active', i === idx);
-    });
-    panels.forEach(function(p, i) {
-      p.classList.toggle('active', i === idx);
-    });
+    tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
+    panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
+
+    /* Double rAF: wacht tot browser het nieuwe panel volledig heeft gelayout */
     requestAnimationFrame(function() {
-      if (window.parent !== window) {
-        window.parent.postMessage({
-          type: 'digibuur-resize',
-          height: document.body.scrollHeight
-        }, '*');
-      }
+      requestAnimationFrame(function() {
+        sendHeight();
+        setTimeout(sendHeight, 150); /* iOS fallback voor trage reflows */
+      });
     });
   }
 
+  /* ── Bind clicks + touch ── */
   tabs.forEach(function(tab, i) {
-    tab.addEventListener('click', function() { switchTo(i); });
+    tab.addEventListener('click',    function()  { switchTo(i); });
     tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
   });
 
-  window.addEventListener('load', function() {
-    if (window.parent !== window) {
-      window.parent.postMessage({
-        type: 'digibuur-resize',
-        height: document.body.scrollHeight
-      }, '*');
-    }
+  /* ── Initial height on load ── */
+  function onReady() {
+    sendHeight();
+    setTimeout(sendHeight, 300);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onReady);
+  } else {
+    onReady();
+  }
+  window.addEventListener('load', sendHeight);
+
+  /* ── Re-measure bij viewport resize (rotatie, toetsenbord) ── */
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(sendHeight, 150);
   });
+
 })();
 </script>
 
