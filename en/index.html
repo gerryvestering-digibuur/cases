@@ -51,7 +51,6 @@ body { padding: 10px 20px 10px; }
   color: #fff;
   transform: scale(1.03);
 }
-/* Tab active colors - subtle muted tones */
 .tab.active[data-i="0"] { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); box-shadow: 0 4px 14px rgba(30,58,110,0.3); }
 .tab.active[data-i="1"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
 .tab.active[data-i="2"] { background: linear-gradient(135deg, #0d5c47, #0a7a5a); box-shadow: 0 4px 14px rgba(13,92,71,0.3); }
@@ -115,7 +114,7 @@ body { padding: 10px 20px 10px; }
 }
 .benefit-check svg { width: 10px; height: 10px; }
 
-/* CTA Button - DigiBuur huisstijl */
+/* CTA Button */
 .cta {
   display: block; width: 100%;
   background: linear-gradient(38deg, #301363, #08328570);
@@ -132,7 +131,6 @@ body { padding: 10px 20px 10px; }
   padding: 20px;
   display: flex; align-items: flex-start; justify-content: center;
 }
-/* Right side background matches theme with light tint */
 .panel[data-p="0"] .right { background: linear-gradient(135deg, #e8eef8, #d4dff0); }
 .panel[data-p="1"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
 .panel[data-p="2"] .right { background: linear-gradient(135deg, #e2f3ed, #cfe8de); }
@@ -213,7 +211,6 @@ body { padding: 10px 20px 10px; }
 .q-val { font-weight: 600; color: #2d3748; }
 .q-total { border-top: 2px solid #e8ecf1; margin-top: 4px; padding-top: 6px; }
 
-/* Action buttons */
 .act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
 .act-btn {
   padding: 8px; border-radius: 7px; text-align: center;
@@ -221,9 +218,9 @@ body { padding: 10px 20px 10px; }
 }
 
 /* ===== COLOR THEMES ===== */
-.theme-blue { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
+.theme-blue   { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
 .theme-purple { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); }
-.theme-green { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
+.theme-green  { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
 .theme-orange { background: linear-gradient(135deg, #8a3e0a, #a04b10); }
 
 /* ===== RESPONSIVE ===== */
@@ -317,15 +314,15 @@ body { padding: 10px 20px 10px; }
           <div><span class="mock-name">DigiBuur Assistant</span><span class="mock-sub">Online — replies instantly</span></div>
         </div>
         <div class="mock-body">
-          <div class="msg msg-bot theme-blue">Welcome! I’m the digital assistant. How can I help you?</div>
+          <div class="msg msg-bot theme-blue">Welcome! I'm the digital assistant. How can I help you?</div>
           <div class="msg-clear"></div>
           <div class="msg msg-user">What are your opening hours?</div>
           <div class="msg-clear"></div>
-          <div class="msg msg-bot theme-blue">We’re available Mon–Fri from 9:00 AM to 5:00 PM. Would you like to book an appointment right away?</div>
+          <div class="msg msg-bot theme-blue">We're available Mon–Fri from 9:00 AM to 5:00 PM. Would you like to book an appointment right away?</div>
           <div class="msg-clear"></div>
           <div class="msg msg-user">Yes please, tomorrow at 2:00 PM?</div>
           <div class="msg-clear"></div>
-          <div class="msg msg-bot theme-blue">Noted! Your appointment is scheduled for tomorrow at 2:00 PM. You’ll receive a confirmation by email.</div>
+          <div class="msg msg-bot theme-blue">Noted! Your appointment is scheduled for tomorrow at 2:00 PM. You'll receive a confirmation by email.</div>
           <div class="msg-clear"></div>
         </div>
       </div>
@@ -437,7 +434,7 @@ body { padding: 10px 20px 10px; }
     </div>
   </div>
 
-  <!-- ========== OFFERTES ========== -->
+  <!-- ========== QUOTES ========== -->
   <div class="panel" data-p="3">
     <div class="left theme-orange">
       <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-doc"/></svg></div>
@@ -445,7 +442,7 @@ body { padding: 10px 20px 10px; }
       <p class="left-sub">Generate professional quotes in seconds</p>
       <ul class="benefits">
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Generate professional quotes with one click</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic follow-up if the quote hasn’t been viewed</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic follow-up if the quote hasn't been viewed</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Online acceptance with digital signature</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Real-time notifications when the client opens the quote</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Insight into conversion rates and follow-up timing</span></li>
@@ -479,43 +476,62 @@ body { padding: 10px 20px 10px; }
     </div>
   </div>
 
-</div>
+</div><!-- /.card -->
 
 <script>
 (function() {
-  var tabs = document.querySelectorAll('.tab');
+  var tabs   = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.panel');
 
-  function switchTo(idx) {
-    tabs.forEach(function(t, i) {
-      t.classList.toggle('active', i === idx);
-    });
-    panels.forEach(function(p, i) {
-      p.classList.toggle('active', i === idx);
-    });
-    requestAnimationFrame(function() {
-      if (window.parent !== window) {
-        window.parent.postMessage({
-          type: 'digibuur-resize',
-          height: document.body.scrollHeight
-        }, '*');
-      }
-    });
+  /* ── Core resize sender ── */
+  function sendHeight() {
+    if (window.parent === window) return;
+    /* Use scrollHeight of documentElement for most accurate mobile measure */
+    var h = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+    window.parent.postMessage({ type: 'digibuur-resize', height: h }, '*');
   }
 
+  /* ── Switch tab ── */
+  function switchTo(idx) {
+    tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
+    panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
+
+    /* Wait for CSS grid reflow (animation + layout), then measure */
+    setTimeout(sendHeight, 50);
+    setTimeout(sendHeight, 200);  /* second pass catches slow reflows on iOS */
+  }
+
+  /* ── Bind clicks + touch ── */
   tabs.forEach(function(tab, i) {
-    tab.addEventListener('click', function() { switchTo(i); });
+    tab.addEventListener('click',    function()  { switchTo(i); });
     tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
   });
 
-  window.addEventListener('load', function() {
-    if (window.parent !== window) {
-      window.parent.postMessage({
-        type: 'digibuur-resize',
-        height: document.body.scrollHeight
-      }, '*');
-    }
+  /* ── Initial height on load ── */
+  function onReady() {
+    sendHeight();
+    setTimeout(sendHeight, 300); /* fonts / images may still be loading */
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onReady);
+  } else {
+    onReady();
+  }
+  window.addEventListener('load', sendHeight); /* after images load */
+
+  /* ── Re-measure on viewport resize (e.g. phone rotation, keyboard pop-up) ── */
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(sendHeight, 150);
   });
+
 })();
 </script>
 
