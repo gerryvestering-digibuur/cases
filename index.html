@@ -15,11 +15,11 @@ html, body {
   overflow-x: hidden;
 }
 body { padding: 10px 20px 10px; }
-
+ 
 /* ===== SVG ICONS ===== */
 .ico { display: inline-block; vertical-align: middle; }
 .ico svg { display: block; }
-
+ 
 /* ===== TABS ROW ===== */
 .tabs {
   display: grid;
@@ -55,11 +55,11 @@ body { padding: 10px 20px 10px; }
 .tab.active[data-i="1"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
 .tab.active[data-i="2"] { background: linear-gradient(135deg, #0d5c47, #0a7a5a); box-shadow: 0 4px 14px rgba(13,92,71,0.3); }
 .tab.active[data-i="3"] { background: linear-gradient(135deg, #8a3e0a, #a04b10); box-shadow: 0 4px 14px rgba(138,62,10,0.3); }
-
+ 
 .tab-icon { display: block; margin: 0 auto 3px; }
 .tab-icon svg { margin: 0 auto; }
 .tab-label { font-size: 16px; font-weight: 700; display: block; line-height: 1.2; color: #F5F5F5; }
-
+ 
 /* ===== CARD ===== */
 .card {
   max-width: 1100px;
@@ -68,7 +68,7 @@ body { padding: 10px 20px 10px; }
   border-radius: 16px;
   overflow: hidden;
 }
-
+ 
 /* ===== PANELS ===== */
 .panel { display: none; }
 .panel.active {
@@ -77,7 +77,7 @@ body { padding: 10px 20px 10px; }
   animation: fadeIn 0.35s ease;
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
+ 
 /* ===== LEFT SIDE ===== */
 .left {
   padding: 22px 26px;
@@ -99,7 +99,7 @@ body { padding: 10px 20px 10px; }
 .left-sub {
   font-size: 13.5px; font-weight: 600; opacity: 0.9; margin-bottom: 12px; color: #fff; line-height: 1.35;
 }
-
+ 
 /* Benefits list */
 .benefits { list-style: none; margin-bottom: 14px; }
 .benefit {
@@ -113,7 +113,7 @@ body { padding: 10px 20px 10px; }
   margin-top: 1px;
 }
 .benefit-check svg { width: 10px; height: 10px; }
-
+ 
 /* CTA Button - DigiBuur huisstijl */
 .cta {
   display: block; width: 100%;
@@ -125,7 +125,7 @@ body { padding: 10px 20px 10px; }
   transition: all 0.25s ease; margin-top: auto;
 }
 .cta:hover { background: linear-gradient(38deg, #4a1d8e, #0a3fa0); border-color: #94a8d0; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(48,19,99,0.35); }
-
+ 
 /* ===== RIGHT SIDE (MOCKUP) ===== */
 .right {
   padding: 20px;
@@ -135,7 +135,7 @@ body { padding: 10px 20px 10px; }
 .panel[data-p="1"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
 .panel[data-p="2"] .right { background: linear-gradient(135deg, #e2f3ed, #cfe8de); }
 .panel[data-p="3"] .right { background: linear-gradient(135deg, #f5ede3, #ecddd0); }
-
+ 
 .mockup {
   width: 100%; max-width: 420px;
   border-radius: 14px; overflow: hidden;
@@ -155,21 +155,27 @@ body { padding: 10px 20px 10px; }
 .mock-av svg { width: 14px; height: 14px; }
 .mock-name { font-size: 12.5px; font-weight: 600; color: #fff; display: block; }
 .mock-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
-.mock-body { padding: 12px 14px; background: #fff; }
-
-/* ===== CHAT MESSAGES ===== */
+ 
+/* ===== MOCK BODY — flexbox zodat chat-bubbles niet floaten ===== */
+.mock-body {
+  padding: 12px 14px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+ 
+/* ===== CHAT MESSAGES — geen floats meer ===== */
 .msg {
-  padding: 8px 12px; border-radius: 12px;
-  margin-bottom: 6px; font-size: 12px; line-height: 1.45;
-  max-width: 88%; clear: both;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  max-width: 88%;
 }
-.msg-bot { color: #fff; border-radius: 12px 12px 12px 4px; float: left; }
-.msg-user {
-  background: #edf0f7; color: #2d3748;
-  border-radius: 12px 12px 4px 12px; float: right;
-}
-.msg-clear { clear: both; height: 0; }
-
+.msg-bot  { align-self: flex-start; color: #fff; border-radius: 12px 12px 12px 4px; }
+.msg-user { align-self: flex-end;   background: #edf0f7; color: #2d3748; border-radius: 12px 12px 4px 12px; }
+ 
 /* ===== SOCIAL CARDS ===== */
 .s-card {
   border: 1px solid #e8ecf1; border-radius: 10px;
@@ -189,7 +195,7 @@ body { padding: 10px 20px 10px; }
 }
 .s-text { font-size: 11.5px; color: #4a5568; line-height: 1.4; margin-bottom: 4px; display: block; }
 .s-engage { display: flex; gap: 10px; font-size: 10px; color: #a0aec0; }
-
+ 
 /* ===== REMINDER CARDS ===== */
 .r-card {
   border: 1px solid #e8ecf1; border-radius: 10px;
@@ -201,7 +207,7 @@ body { padding: 10px 20px 10px; }
 }
 .r-name { font-size: 12.5px; font-weight: 600; color: #2d3748; display: block; margin: 2px 0 1px; }
 .r-info { font-size: 10.5px; color: #718096; display: block; line-height: 1.35; }
-
+ 
 /* ===== QUOTE ROWS ===== */
 .q-row {
   display: flex; justify-content: space-between; align-items: center;
@@ -210,19 +216,19 @@ body { padding: 10px 20px 10px; }
 .q-lbl { color: #718096; }
 .q-val { font-weight: 600; color: #2d3748; }
 .q-total { border-top: 2px solid #e8ecf1; margin-top: 4px; padding-top: 6px; }
-
+ 
 .act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
 .act-btn {
   padding: 8px; border-radius: 7px; text-align: center;
   font-size: 12px; font-weight: 600; cursor: pointer;
 }
-
+ 
 /* ===== COLOR THEMES ===== */
 .theme-blue   { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
 .theme-purple { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); }
 .theme-green  { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
 .theme-orange { background: linear-gradient(135deg, #8a3e0a, #a04b10); }
-
+ 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 800px) {
   .panel.active { grid-template-columns: 1fr; }
@@ -246,7 +252,7 @@ body { padding: 10px 20px 10px; }
 </style>
 </head>
 <body>
-
+ 
 <!-- SVG icon definitions -->
 <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
   <symbol id="ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -268,7 +274,7 @@ body { padding: 10px 20px 10px; }
     <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/>
   </symbol>
 </svg>
-
+ 
 <!-- TABS -->
 <div class="tabs" id="tabs">
   <div class="tab active" data-i="0">
@@ -280,7 +286,7 @@ body { padding: 10px 20px 10px; }
     <span class="tab-label">Social Media</span>
   </div>
   <div class="tab" data-i="2">
-    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-calendar"/></svg></span>
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-social"/></svg></span>
     <span class="tab-label">No-Show</span>
   </div>
   <div class="tab" data-i="3">
@@ -288,10 +294,10 @@ body { padding: 10px 20px 10px; }
     <span class="tab-label">Offertes</span>
   </div>
 </div>
-
+ 
 <!-- CARD -->
 <div class="card">
-
+ 
   <!-- ========== CHATBOT ========== -->
   <div class="panel active" data-p="0">
     <div class="left theme-blue">
@@ -315,20 +321,15 @@ body { padding: 10px 20px 10px; }
         </div>
         <div class="mock-body">
           <div class="msg msg-bot theme-blue">Welkom! Ik ben de digitale assistent. Waarmee kan ik u helpen?</div>
-          <div class="msg-clear"></div>
           <div class="msg msg-user">Wat zijn jullie openingstijden?</div>
-          <div class="msg-clear"></div>
           <div class="msg msg-bot theme-blue">We zijn bereikbaar ma-vr van 9:00 tot 17:00 uur. Wilt u direct een afspraak inplannen?</div>
-          <div class="msg-clear"></div>
           <div class="msg msg-user">Ja graag, morgen om 14:00?</div>
-          <div class="msg-clear"></div>
           <div class="msg msg-bot theme-blue">Genoteerd! Uw afspraak staat ingepland voor morgen 14:00. U ontvangt een bevestiging per e-mail.</div>
-          <div class="msg-clear"></div>
         </div>
       </div>
     </div>
   </div>
-
+ 
   <!-- ========== SOCIAL MEDIA ========== -->
   <div class="panel" data-p="1">
     <div class="left theme-purple">
@@ -386,7 +387,7 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
-
+ 
   <!-- ========== NO-SHOW ========== -->
   <div class="panel" data-p="2">
     <div class="left theme-green">
@@ -433,7 +434,7 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
-
+ 
   <!-- ========== OFFERTES ========== -->
   <div class="panel" data-p="3">
     <div class="left theme-orange">
@@ -475,14 +476,14 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
-
+ 
 </div><!-- /.card -->
-
+ 
 <script>
 (function() {
   var tabs   = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.panel');
-
+ 
   /* ── Core resize sender ── */
   function sendHeight() {
     if (window.parent === window) return;
@@ -494,12 +495,12 @@ body { padding: 10px 20px 10px; }
     );
     window.parent.postMessage({ type: 'digibuur-resize', height: h - 10 }, '*');
   }
-
+ 
   /* ── Switch tab ── */
   function switchTo(idx) {
     tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
     panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
-
+ 
     /* Double rAF: wacht tot browser het nieuwe panel volledig heeft gelayout */
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
@@ -508,35 +509,35 @@ body { padding: 10px 20px 10px; }
       });
     });
   }
-
+ 
   /* ── Bind clicks + touch ── */
   tabs.forEach(function(tab, i) {
     tab.addEventListener('click',    function()  { switchTo(i); });
     tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
   });
-
+ 
   /* ── Initial height on load ── */
   function onReady() {
     sendHeight();
     setTimeout(sendHeight, 300);
   }
-
+ 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', onReady);
   } else {
     onReady();
   }
   window.addEventListener('load', sendHeight);
-
+ 
   /* ── Re-measure bij viewport resize (rotatie, toetsenbord) ── */
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(sendHeight, 150);
   });
-
+ 
 })();
 </script>
-
+ 
 </body>
 </html>
