@@ -15,11 +15,11 @@ html, body {
   overflow-x: hidden;
 }
 body { padding: 10px 20px 10px; }
- 
+
 /* ===== SVG ICONS ===== */
 .ico { display: inline-block; vertical-align: middle; }
 .ico svg { display: block; }
- 
+
 /* ===== TABS ROW ===== */
 .tabs {
   display: grid;
@@ -55,11 +55,11 @@ body { padding: 10px 20px 10px; }
 .tab.active[data-i="1"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
 .tab.active[data-i="2"] { background: linear-gradient(135deg, #0d5c47, #0a7a5a); box-shadow: 0 4px 14px rgba(13,92,71,0.3); }
 .tab.active[data-i="3"] { background: linear-gradient(135deg, #8a3e0a, #a04b10); box-shadow: 0 4px 14px rgba(138,62,10,0.3); }
- 
+
 .tab-icon { display: block; margin: 0 auto 3px; }
 .tab-icon svg { margin: 0 auto; }
 .tab-label { font-size: 16px; font-weight: 700; display: block; line-height: 1.2; color: #F5F5F5; }
- 
+
 /* ===== CARD ===== */
 .card {
   max-width: 1100px;
@@ -67,10 +67,8 @@ body { padding: 10px 20px 10px; }
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
-  /* Voorkomt krimpen tijdens paneelwissel */
-  min-height: var(--card-min-height, 0px);
 }
- 
+
 /* ===== PANELS ===== */
 .panel { display: none; }
 .panel.active {
@@ -78,8 +76,19 @@ body { padding: 10px 20px 10px; }
   grid-template-columns: 1fr 1fr;
   animation: fadeIn 0.35s ease;
 }
+/* pre-measure: panel is gelayout maar onzichtbaar — puur voor hoogte-meting */
+.panel.pre-measure {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
- 
+
 /* ===== LEFT SIDE ===== */
 .left {
   padding: 22px 26px;
@@ -101,7 +110,7 @@ body { padding: 10px 20px 10px; }
 .left-sub {
   font-size: 13.5px; font-weight: 600; opacity: 0.9; margin-bottom: 12px; color: #fff; line-height: 1.35;
 }
- 
+
 /* Benefits list */
 .benefits { list-style: none; margin-bottom: 14px; }
 .benefit {
@@ -115,8 +124,8 @@ body { padding: 10px 20px 10px; }
   margin-top: 1px;
 }
 .benefit-check svg { width: 10px; height: 10px; }
- 
-/* CTA Button - DigiBuur huisstijl */
+
+/* CTA Button */
 .cta {
   display: block; width: 100%;
   background: linear-gradient(38deg, #301363, #08328570);
@@ -127,7 +136,7 @@ body { padding: 10px 20px 10px; }
   transition: all 0.25s ease; margin-top: auto;
 }
 .cta:hover { background: linear-gradient(38deg, #4a1d8e, #0a3fa0); border-color: #94a8d0; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(48,19,99,0.35); }
- 
+
 /* ===== RIGHT SIDE (MOCKUP) ===== */
 .right {
   padding: 20px;
@@ -137,7 +146,7 @@ body { padding: 10px 20px 10px; }
 .panel[data-p="1"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
 .panel[data-p="2"] .right { background: linear-gradient(135deg, #e2f3ed, #cfe8de); }
 .panel[data-p="3"] .right { background: linear-gradient(135deg, #f5ede3, #ecddd0); }
- 
+
 .mockup {
   width: 100%; max-width: 420px;
   border-radius: 14px; overflow: hidden;
@@ -157,15 +166,14 @@ body { padding: 10px 20px 10px; }
 .mock-av svg { width: 14px; height: 14px; }
 .mock-name { font-size: 12.5px; font-weight: 600; color: #fff; display: block; }
 .mock-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
- 
-/* ===== MOCK BODY ===== */
+
 .mock-body {
   padding: 12px 14px;
   background: #fff;
   display: flex;
   flex-direction: column;
 }
- 
+
 /* ===== CHAT MESSAGES ===== */
 .msg {
   padding: 8px 12px;
@@ -177,7 +185,7 @@ body { padding: 10px 20px 10px; }
 }
 .msg-bot  { align-self: flex-start; color: #fff; border-radius: 12px 12px 12px 4px; }
 .msg-user { align-self: flex-end;   background: #edf0f7; color: #2d3748; border-radius: 12px 12px 4px 12px; }
- 
+
 /* ===== SOCIAL CARDS ===== */
 .s-card {
   border: 1px solid #e8ecf1; border-radius: 10px;
@@ -197,7 +205,7 @@ body { padding: 10px 20px 10px; }
 }
 .s-text { font-size: 11.5px; color: #4a5568; line-height: 1.4; margin-bottom: 4px; display: block; }
 .s-engage { display: flex; gap: 10px; font-size: 10px; color: #a0aec0; }
- 
+
 /* ===== REMINDER CARDS ===== */
 .r-card {
   border: 1px solid #e8ecf1; border-radius: 10px;
@@ -209,7 +217,7 @@ body { padding: 10px 20px 10px; }
 }
 .r-name { font-size: 12.5px; font-weight: 600; color: #2d3748; display: block; margin: 2px 0 1px; }
 .r-info { font-size: 10.5px; color: #718096; display: block; line-height: 1.35; }
- 
+
 /* ===== QUOTE ROWS ===== */
 .q-row {
   display: flex; justify-content: space-between; align-items: center;
@@ -218,22 +226,23 @@ body { padding: 10px 20px 10px; }
 .q-lbl { color: #718096; }
 .q-val { font-weight: 600; color: #2d3748; }
 .q-total { border-top: 2px solid #e8ecf1; margin-top: 4px; padding-top: 6px; }
- 
+
 .act-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
 .act-btn {
   padding: 8px; border-radius: 7px; text-align: center;
   font-size: 12px; font-weight: 600; cursor: pointer;
 }
- 
+
 /* ===== COLOR THEMES ===== */
 .theme-blue   { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
 .theme-purple { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); }
 .theme-green  { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
 .theme-orange { background: linear-gradient(135deg, #8a3e0a, #a04b10); }
- 
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 800px) {
-  .panel.active { grid-template-columns: 1fr; }
+  .panel.active      { grid-template-columns: 1fr; }
+  .panel.pre-measure { grid-template-columns: 1fr; }
   .tabs { grid-template-columns: repeat(2, 1fr); }
   .tab-label { font-size: 14px; }
   .left { padding: 20px 18px; }
@@ -254,7 +263,7 @@ body { padding: 10px 20px 10px; }
 </style>
 </head>
 <body>
- 
+
 <!-- SVG icon definitions -->
 <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
   <symbol id="ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -276,7 +285,7 @@ body { padding: 10px 20px 10px; }
     <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/>
   </symbol>
 </svg>
- 
+
 <!-- TABS -->
 <div class="tabs" id="tabs">
   <div class="tab active" data-i="0">
@@ -296,10 +305,10 @@ body { padding: 10px 20px 10px; }
     <span class="tab-label">Offertes</span>
   </div>
 </div>
- 
+
 <!-- CARD -->
-<div class="card">
- 
+<div class="card" id="card">
+
   <!-- ========== CHATBOT ========== -->
   <div class="panel active" data-p="0">
     <div class="left theme-blue">
@@ -331,7 +340,7 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
- 
+
   <!-- ========== SOCIAL MEDIA ========== -->
   <div class="panel" data-p="1">
     <div class="left theme-purple">
@@ -389,7 +398,7 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
- 
+
   <!-- ========== NO-SHOW ========== -->
   <div class="panel" data-p="2">
     <div class="left theme-green">
@@ -436,7 +445,7 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
- 
+
   <!-- ========== OFFERTES ========== -->
   <div class="panel" data-p="3">
     <div class="left theme-orange">
@@ -478,19 +487,19 @@ body { padding: 10px 20px 10px; }
       </div>
     </div>
   </div>
- 
+
 </div><!-- /.card -->
- 
+
 <script>
 (function() {
   var tabs   = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.panel');
-  var card   = document.querySelector('.card');
+  var tabsEl = document.getElementById('tabs');
 
-  /* ── Core resize sender ── */
-  function sendHeight() {
+  /* ── Stuur hoogte naar Carrd parent ── */
+  function sendHeight(override) {
     if (window.parent === window) return;
-    var h = Math.max(
+    var h = override || Math.max(
       document.body.scrollHeight,
       document.body.offsetHeight,
       document.documentElement.scrollHeight,
@@ -499,22 +508,39 @@ body { padding: 10px 20px 10px; }
     window.parent.postMessage({ type: 'digibuur-resize', height: h - 10 }, '*');
   }
 
+  /* ── Meet hoogte van een panel VÓÓR het zichtbaar wordt ──
+     Zet het panel tijdelijk op position:absolute + visibility:hidden zodat
+     de browser het volledig kan layouten zonder het te tonen.               */
+  function measurePanel(panel) {
+    panel.classList.add('pre-measure');
+    var h = panel.offsetHeight;
+    panel.classList.remove('pre-measure');
+    return h;
+  }
+
   /* ── Switch tab ── */
   function switchTo(idx) {
-    /* Vergrendel huidige kaarthoogte als minimum VOOR de wissel —
-       zo kan de container niet krimpen terwijl het nieuwe panel inlaadt */
-    card.style.setProperty('--card-min-height', card.offsetHeight + 'px');
+    var nextPanel = panels[idx];
 
+    /* 1. Meet nieuwe panel-hoogte VOOR de DOM-wissel */
+    var panelH = measurePanel(nextPanel);
+
+    /* 2. Bereken totale iframe-hoogte:
+          tabs-hoogte + gap (12px margin-bottom) + nieuwe card-hoogte + body padding (20px) */
+    var totalH = tabsEl.offsetHeight + 12 + panelH + 20;
+
+    /* 3. Stuur correcte hoogte naar Carrd VOORDAT de wissel plaatsvindt —
+          zo past Carrd de iframe aan vóór de content verschijnt              */
+    sendHeight(totalH);
+
+    /* 4. Wissel de DOM */
     tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
     panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
 
-    /* Wacht tot browser het nieuwe panel volledig heeft gelayout,
-       reset daarna de min-height en stuur één schone hoogte door */
+    /* 5. Controleer-meting na render (vangt sub-pixel afwijkingen op) */
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
-        card.style.setProperty('--card-min-height', '0px');
         sendHeight();
-        setTimeout(sendHeight, 200); /* iOS fallback voor trage reflows */
       });
     });
   }
@@ -538,7 +564,7 @@ body { padding: 10px 20px 10px; }
   }
   window.addEventListener('load', sendHeight);
 
-  /* ── Re-measure bij viewport resize (rotatie, toetsenbord) ── */
+  /* ── Re-measure bij viewport resize ── */
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
@@ -547,6 +573,6 @@ body { padding: 10px 20px 10px; }
 
 })();
 </script>
- 
+
 </body>
 </html>
