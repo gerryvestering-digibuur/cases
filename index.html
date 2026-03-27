@@ -23,7 +23,7 @@ body { padding: 10px 20px 10px; }
 /* ===== TABS ROW ===== */
 .tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   margin-bottom: 12px;
   max-width: 1100px;
@@ -55,6 +55,8 @@ body { padding: 10px 20px 10px; }
 .tab.active[data-i="1"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
 .tab.active[data-i="2"] { background: linear-gradient(135deg, #0d5c47, #0a7a5a); box-shadow: 0 4px 14px rgba(13,92,71,0.3); }
 .tab.active[data-i="3"] { background: linear-gradient(135deg, #8a3e0a, #a04b10); box-shadow: 0 4px 14px rgba(138,62,10,0.3); }
+.tab.active[data-i="4"] { background: linear-gradient(135deg, #0f5c6d, #14839b); box-shadow: 0 4px 14px rgba(15,92,109,0.3); }
+.tab.active[data-i="5"] { background: linear-gradient(135deg, #7a1f47, #b02667); box-shadow: 0 4px 14px rgba(122,31,71,0.3); }
 
 .tab-icon { display: block; margin: 0 auto 3px; }
 .tab-icon svg { margin: 0 auto; }
@@ -146,6 +148,8 @@ body { padding: 10px 20px 10px; }
 .panel[data-p="1"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
 .panel[data-p="2"] .right { background: linear-gradient(135deg, #e2f3ed, #cfe8de); }
 .panel[data-p="3"] .right { background: linear-gradient(135deg, #f5ede3, #ecddd0); }
+.panel[data-p="4"] .right { background: linear-gradient(135deg, #e3f0f3, #d1e6eb); }
+.panel[data-p="5"] .right { background: linear-gradient(135deg, #f5e5ec, #efd7e1); }
 
 .mockup {
   width: 100%; max-width: 420px;
@@ -233,13 +237,61 @@ body { padding: 10px 20px 10px; }
   font-size: 12px; font-weight: 600; cursor: pointer;
 }
 
+/* ===== MINI OFFICE LIST ===== */
+.o-card {
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.o-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px;
+}
+.o-title {
+  font-size: 12.5px; font-weight: 700; color: #2d3748;
+}
+.o-tag {
+  display: inline-block; padding: 2px 7px; border-radius: 8px;
+  font-size: 9.5px; font-weight: 700;
+}
+.o-line {
+  font-size: 11px; color: #4a5568; line-height: 1.45; margin-bottom: 3px;
+}
+
+/* ===== CALL LOG ===== */
+.call-card {
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.call-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; margin-bottom: 6px;
+}
+.call-name {
+  font-size: 12.5px; font-weight: 700; color: #2d3748;
+}
+.call-meta {
+  font-size: 10.5px; color: #718096; line-height: 1.35;
+}
+.call-pill {
+  display: inline-block; padding: 2px 8px; border-radius: 999px;
+  font-size: 9.5px; font-weight: 700;
+}
+.call-note {
+  font-size: 11px; color: #4a5568; line-height: 1.45;
+}
+
 /* ===== COLOR THEMES ===== */
 .theme-blue   { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
 .theme-purple { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); }
 .theme-green  { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
 .theme-orange { background: linear-gradient(135deg, #8a3e0a, #a04b10); }
+.theme-teal   { background: linear-gradient(135deg, #0f5c6d, #14839b); }
+.theme-rose   { background: linear-gradient(135deg, #7a1f47, #b02667); }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 980px) {
+  .tabs { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 800px) {
   .panel.active      { grid-template-columns: 1fr; }
   .panel.pre-measure { grid-template-columns: 1fr; }
@@ -284,6 +336,12 @@ body { padding: 10px 20px 10px; }
   <symbol id="ico-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/>
   </symbol>
+  <symbol id="ico-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="12" x2="22" y2="12"/>
+  </symbol>
+  <symbol id="ico-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </symbol>
 </svg>
 
 <!-- TABS -->
@@ -297,12 +355,20 @@ body { padding: 10px 20px 10px; }
     <span class="tab-label">Social Media</span>
   </div>
   <div class="tab" data-i="2">
-    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-social"/></svg></span>
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-calendar"/></svg></span>
     <span class="tab-label">No-Show</span>
   </div>
   <div class="tab" data-i="3">
     <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-doc"/></svg></span>
     <span class="tab-label">Offertes</span>
+  </div>
+  <div class="tab" data-i="4">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-briefcase"/></svg></span>
+    <span class="tab-label">Office Assistant</span>
+  </div>
+  <div class="tab" data-i="5">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-phone"/></svg></span>
+    <span class="tab-label">AI Voice Agent</span>
   </div>
 </div>
 
@@ -488,6 +554,117 @@ body { padding: 10px 20px 10px; }
     </div>
   </div>
 
+  <!-- ========== OFFICE ASSISTANT ========== -->
+  <div class="panel" data-p="4">
+    <div class="left theme-teal">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-briefcase"/></svg></div>
+      <h3>Office Assistant</h3>
+      <p class="left-sub">Laat terugkerend regelwerk automatisch afhandelen</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Verwerkt e-mails, intakeverzoeken en terugbelnotities automatisch</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Maakt samenvattingen en zet acties direct klaar voor opvolging</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Bespaart tijd op administratie en interne communicatie</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Helpt je team sneller reageren zonder extra druk op kantoor</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Werkt slim samen met je agenda, inbox en CRM</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Ja, dat wil ik ook!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-teal">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-briefcase"/></svg></div>
+          <div><span class="mock-name">Office Flow</span><span class="mock-sub">Inbox, acties en opvolging</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="o-card">
+            <div class="o-top">
+              <span class="o-title">Nieuwe intake verwerkt</span>
+              <span class="o-tag" style="background:#dcfce7;color:#16a34a;">Klaar</span>
+            </div>
+            <div class="o-line">Contactgegevens opgeslagen en doorgestuurd naar het team.</div>
+            <div class="o-line">Vervolgactie: voorstelmail ingepland voor vandaag 15:30.</div>
+          </div>
+
+          <div class="o-card">
+            <div class="o-top">
+              <span class="o-title">E-mail samengevat</span>
+              <span class="o-tag" style="background:#e0f2fe;color:#0369a1;">Nieuw</span>
+            </div>
+            <div class="o-line">Onderwerp: aanvraag terugbelverzoek praktijksoftware.</div>
+            <div class="o-line">Actie: taak aangemaakt voor verkoop + herinnering morgen 09:00.</div>
+          </div>
+
+          <div class="o-card">
+            <div class="o-top">
+              <span class="o-title">Weekoverzicht klaar</span>
+              <span class="o-tag" style="background:#f3e8ff;color:#7c3aed;">Automatisch</span>
+            </div>
+            <div class="o-line">12 aanvragen verwerkt, 4 terugbelverzoeken open, 3 offertes verstuurd.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== AI VOICE AGENT ========== -->
+  <div class="panel" data-p="5">
+    <div class="left theme-rose">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-phone"/></svg></div>
+      <h3>AI Voice Agent</h3>
+      <p class="left-sub">Neem telefoontjes op zonder dat jij steeds hoeft op te nemen</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Neemt 24/7 de telefoon op in jouw stijl en tone of voice</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Beantwoordt vragen, plant afspraken en noteert terugbelverzoeken</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Stuurt direct een samenvatting naar jou of je team</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Voorkomt gemiste kansen buiten openingstijden of tijdens drukte</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Geeft klanten direct rust, duidelijkheid en een professionele eerste indruk</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Ja, dat wil ik ook!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-rose">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-phone"/></svg></div>
+          <div><span class="mock-name">Roos — Gesprekslog</span><span class="mock-sub">Laatste oproepen automatisch verwerkt</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="call-card">
+            <div class="call-row">
+              <div>
+                <div class="call-name">M. de Jong</div>
+                <div class="call-meta">Vandaag 09:12 • 2m 18s</div>
+              </div>
+              <span class="call-pill" style="background:#dcfce7;color:#16a34a;">Afspraak ingepland</span>
+            </div>
+            <div class="call-note">Controle-afspraak geboekt voor donderdag om 10:30. Bevestiging per sms verstuurd.</div>
+          </div>
+
+          <div class="call-card">
+            <div class="call-row">
+              <div>
+                <div class="call-name">Anoniem nummer</div>
+                <div class="call-meta">Vandaag 10:47 • 1m 05s</div>
+              </div>
+              <span class="call-pill" style="background:#fef3c7;color:#d97706;">Terugbelverzoek</span>
+            </div>
+            <div class="call-note">Vroeg naar tarieven en beschikbaarheid. Naam + telefoonnummer netjes genoteerd.</div>
+          </div>
+
+          <div class="call-card">
+            <div class="call-row">
+              <div>
+                <div class="call-name">S. Hoekstra</div>
+                <div class="call-meta">Vandaag 12:03 • 0m 52s</div>
+              </div>
+              <span class="call-pill" style="background:#e0f2fe;color:#0369a1;">Vraag beantwoord</span>
+            </div>
+            <div class="call-note">Openingstijden doorgegeven en route-informatie gedeeld. Geen opvolging nodig.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /.card -->
 
 <script>
@@ -547,7 +724,7 @@ body { padding: 10px 20px 10px; }
 
   /* ── Bind clicks + touch ── */
   tabs.forEach(function(tab, i) {
-    tab.addEventListener('click',    function()  { switchTo(i); });
+    tab.addEventListener('click', function() { switchTo(i); });
     tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
   });
 
