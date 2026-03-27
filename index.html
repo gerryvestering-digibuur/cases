@@ -91,6 +91,30 @@ body { padding: 10px 20px 10px; }
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+/* ===== GELIJKE HOOGTE VOOR ALLE PANELS ===== */
+@media (min-width: 801px) {
+  .panel,
+  .panel.active,
+  .panel.pre-measure {
+    min-height: 318px;
+  }
+
+  .left,
+  .right {
+    height: 100%;
+  }
+
+  .mockup {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mock-body {
+    flex: 1;
+  }
+}
+
 /* ===== LEFT SIDE ===== */
 .left {
   padding: 22px 26px;
@@ -294,7 +318,7 @@ body { padding: 10px 20px 10px; }
 }
 @media (max-width: 800px) {
   .panel.active      { grid-template-columns: 1fr; }
-  .panel.pre-measure { grid-template-columns: 1fr; }
+  .panel.pre-measure { grid-template-columns: 1fr; min-height: auto; }
   .tabs { grid-template-columns: repeat(2, 1fr); }
   .tab-label { font-size: 14px; }
   .left { padding: 20px 18px; }
@@ -672,6 +696,7 @@ body { padding: 10px 20px 10px; }
   var tabs   = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.panel');
   var tabsEl = document.getElementById('tabs');
+  var desktopMinPanelHeight = 318;
 
   /* ── Stuur hoogte naar Carrd parent ── */
   function sendHeight(override) {
@@ -685,36 +710,33 @@ body { padding: 10px 20px 10px; }
     window.parent.postMessage({ type: 'digibuur-resize', height: h - 10 }, '*');
   }
 
-  /* ── Meet hoogte van een panel VÓÓR het zichtbaar wordt ──
-     Zet het panel tijdelijk op position:absolute + visibility:hidden zodat
-     de browser het volledig kan layouten zonder het te tonen.               */
+  /* ── Meet hoogte van een panel VÓÓR het zichtbaar wordt ── */
   function measurePanel(panel) {
     panel.classList.add('pre-measure');
     var h = panel.offsetHeight;
     panel.classList.remove('pre-measure');
+
+    if (window.innerWidth > 800) {
+      h = Math.max(h, desktopMinPanelHeight);
+    }
     return h;
   }
 
   /* ── Switch tab ── */
   function switchTo(idx) {
     var nextPanel = panels[idx];
-
-    /* 1. Meet nieuwe panel-hoogte VOOR de DOM-wissel */
     var panelH = measurePanel(nextPanel);
-
-    /* 2. Bereken totale iframe-hoogte:
-          tabs-hoogte + gap (12px margin-bottom) + nieuwe card-hoogte + body padding (20px) */
     var totalH = tabsEl.offsetHeight + 12 + panelH + 20;
 
-    /* 3. Stuur correcte hoogte naar Carrd VOORDAT de wissel plaatsvindt —
-          zo past Carrd de iframe aan vóór de content verschijnt              */
     sendHeight(totalH);
 
-    /* 4. Wissel de DOM */
-    tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
-    panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
+    tabs.forEach(function(t, i) {
+      t.classList.toggle('active', i === idx);
+    });
+    panels.forEach(function(p, i) {
+      p.classList.toggle('active', i === idx);
+    });
 
-    /* 5. Controleer-meting na render (vangt sub-pixel afwijkingen op) */
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
         sendHeight();
@@ -725,7 +747,10 @@ body { padding: 10px 20px 10px; }
   /* ── Bind clicks + touch ── */
   tabs.forEach(function(tab, i) {
     tab.addEventListener('click', function() { switchTo(i); });
-    tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
+    tab.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      switchTo(i);
+    });
   });
 
   /* ── Initial height on load ── */
@@ -739,6 +764,7 @@ body { padding: 10px 20px 10px; }
   } else {
     onReady();
   }
+
   window.addEventListener('load', sendHeight);
 
   /* ── Re-measure bij viewport resize ── */
@@ -747,7 +773,6 @@ body { padding: 10px 20px 10px; }
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(sendHeight, 150);
   });
-
 })();
 </script>
 
