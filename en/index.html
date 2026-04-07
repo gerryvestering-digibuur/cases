@@ -23,7 +23,7 @@ body { padding: 10px 20px 10px; }
 /* ===== TABS ROW ===== */
 .tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   margin-bottom: 12px;
   max-width: 1100px;
@@ -51,10 +51,12 @@ body { padding: 10px 20px 10px; }
   color: #fff;
   transform: scale(1.03);
 }
-.tab.active[data-i="0"] { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); box-shadow: 0 4px 14px rgba(30,58,110,0.3); }
-.tab.active[data-i="1"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
+.tab.active[data-i="0"] { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); box-shadow: 0 4px 14px rgba(74,29,110,0.3); }
+.tab.active[data-i="1"] { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); box-shadow: 0 4px 14px rgba(30,58,110,0.3); }
 .tab.active[data-i="2"] { background: linear-gradient(135deg, #0d5c47, #0a7a5a); box-shadow: 0 4px 14px rgba(13,92,71,0.3); }
 .tab.active[data-i="3"] { background: linear-gradient(135deg, #8a3e0a, #a04b10); box-shadow: 0 4px 14px rgba(138,62,10,0.3); }
+.tab.active[data-i="4"] { background: linear-gradient(135deg, #0f5c6d, #14839b); box-shadow: 0 4px 14px rgba(15,92,109,0.3); }
+.tab.active[data-i="5"] { background: linear-gradient(135deg, #7a1f47, #b02667); box-shadow: 0 4px 14px rgba(122,31,71,0.3); }
 
 .tab-icon { display: block; margin: 0 auto 3px; }
 .tab-icon svg { margin: 0 auto; }
@@ -76,7 +78,42 @@ body { padding: 10px 20px 10px; }
   grid-template-columns: 1fr 1fr;
   animation: fadeIn 0.35s ease;
 }
+/* pre-measure: panel is laid out but invisible — purely for height measurement */
+.panel.pre-measure {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== EQUAL HEIGHT FOR ALL PANELS ===== */
+@media (min-width: 801px) {
+  .panel,
+  .panel.active,
+  .panel.pre-measure {
+    min-height: 318px;
+  }
+
+  .left,
+  .right {
+    height: 100%;
+  }
+
+  .mockup {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mock-body {
+    flex: 1;
+  }
+}
 
 /* ===== LEFT SIDE ===== */
 .left {
@@ -131,10 +168,12 @@ body { padding: 10px 20px 10px; }
   padding: 20px;
   display: flex; align-items: flex-start; justify-content: center;
 }
-.panel[data-p="0"] .right { background: linear-gradient(135deg, #e8eef8, #d4dff0); }
-.panel[data-p="1"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
+.panel[data-p="0"] .right { background: linear-gradient(135deg, #ede6f5, #ddd4ec); }
+.panel[data-p="1"] .right { background: linear-gradient(135deg, #e8eef8, #d4dff0); }
 .panel[data-p="2"] .right { background: linear-gradient(135deg, #e2f3ed, #cfe8de); }
 .panel[data-p="3"] .right { background: linear-gradient(135deg, #f5ede3, #ecddd0); }
+.panel[data-p="4"] .right { background: linear-gradient(135deg, #e3f0f3, #d1e6eb); }
+.panel[data-p="5"] .right { background: linear-gradient(135deg, #f5e5ec, #efd7e1); }
 
 .mockup {
   width: 100%; max-width: 420px;
@@ -155,20 +194,25 @@ body { padding: 10px 20px 10px; }
 .mock-av svg { width: 14px; height: 14px; }
 .mock-name { font-size: 12.5px; font-weight: 600; color: #fff; display: block; }
 .mock-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
-.mock-body { padding: 12px 14px; background: #fff; }
+
+.mock-body {
+  padding: 12px 14px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
 
 /* ===== CHAT MESSAGES ===== */
 .msg {
-  padding: 8px 12px; border-radius: 12px;
-  margin-bottom: 6px; font-size: 12px; line-height: 1.45;
-  max-width: 88%; clear: both;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  max-width: 88%;
 }
-.msg-bot { color: #fff; border-radius: 12px 12px 12px 4px; float: left; }
-.msg-user {
-  background: #edf0f7; color: #2d3748;
-  border-radius: 12px 12px 4px 12px; float: right;
-}
-.msg-clear { clear: both; height: 0; }
+.msg-bot  { align-self: flex-start; color: #fff; border-radius: 12px 12px 12px 4px; }
+.msg-user { align-self: flex-end;   background: #edf0f7; color: #2d3748; border-radius: 12px 12px 4px 12px; }
 
 /* ===== SOCIAL CARDS ===== */
 .s-card {
@@ -217,15 +261,64 @@ body { padding: 10px 20px 10px; }
   font-size: 12px; font-weight: 600; cursor: pointer;
 }
 
+/* ===== MINI OFFICE LIST ===== */
+.o-card {
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.o-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px;
+}
+.o-title {
+  font-size: 12.5px; font-weight: 700; color: #2d3748;
+}
+.o-tag {
+  display: inline-block; padding: 2px 7px; border-radius: 8px;
+  font-size: 9.5px; font-weight: 700;
+}
+.o-line {
+  font-size: 11px; color: #4a5568; line-height: 1.45; margin-bottom: 3px;
+}
+
+/* ===== CALL LOG ===== */
+.call-card {
+  border: 1px solid #e8ecf1; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.call-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; margin-bottom: 6px;
+}
+.call-name {
+  font-size: 12.5px; font-weight: 700; color: #2d3748;
+}
+.call-meta {
+  font-size: 10.5px; color: #718096; line-height: 1.35;
+}
+.call-pill {
+  display: inline-block; padding: 2px 8px; border-radius: 999px;
+  font-size: 9.5px; font-weight: 700;
+}
+.call-note {
+  font-size: 11px; color: #4a5568; line-height: 1.45;
+}
+
 /* ===== COLOR THEMES ===== */
 .theme-blue   { background: linear-gradient(135deg, #1e3a6e, #1a4fa0); }
 .theme-purple { background: linear-gradient(135deg, #4a1d6e, #5b2d8e); }
 .theme-green  { background: linear-gradient(135deg, #0d5c47, #0a7a5a); }
 .theme-orange { background: linear-gradient(135deg, #8a3e0a, #a04b10); }
+.theme-teal   { background: linear-gradient(135deg, #0f5c6d, #14839b); }
+.theme-rose   { background: linear-gradient(135deg, #7a1f47, #b02667); }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 980px) {
+  .tabs { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 800px) {
-  .panel.active { grid-template-columns: 1fr; }
+  .panel.active      { grid-template-columns: 1fr; }
+  .panel.pre-measure { grid-template-columns: 1fr; min-height: auto; }
   .tabs { grid-template-columns: repeat(2, 1fr); }
   .tab-label { font-size: 14px; }
   .left { padding: 20px 18px; }
@@ -267,6 +360,12 @@ body { padding: 10px 20px 10px; }
   <symbol id="ico-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/>
   </symbol>
+  <symbol id="ico-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="12" x2="22" y2="12"/>
+  </symbol>
+  <symbol id="ico-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </symbol>
 </svg>
 
 <!-- TABS -->
@@ -287,19 +386,27 @@ body { padding: 10px 20px 10px; }
     <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-doc"/></svg></span>
     <span class="tab-label">Quotes</span>
   </div>
+  <div class="tab" data-i="4">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-briefcase"/></svg></span>
+    <span class="tab-label">Office Assistant</span>
+  </div>
+  <div class="tab" data-i="5">
+    <span class="tab-icon"><svg width="24" height="24" style="color:#fff;"><use href="#ico-phone"/></svg></span>
+    <span class="tab-label">AI Voice Agent</span>
+  </div>
 </div>
 
 <!-- CARD -->
-<div class="card">
+<div class="card" id="card">
 
   <!-- ========== CHATBOT ========== -->
   <div class="panel active" data-p="0">
-    <div class="left theme-blue">
+    <div class="left theme-purple">
       <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-chat"/></svg></div>
       <h3>Smart Chatbot & FAQ Assistant</h3>
-      <p class="left-sub">Answers customer questions automatically, 24/7</p>
+      <p class="left-sub">Answer customer questions automatically 24/7</p>
       <ul class="benefits">
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Answers frequently asked questions directly and accurately</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Answers frequently asked questions instantly and accurately</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Runs 24/7 without extra staff or overtime</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically collects contact details for follow-up</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Integrates seamlessly with your website and social media</span></li>
@@ -309,21 +416,16 @@ body { padding: 10px 20px 10px; }
     </div>
     <div class="right">
       <div class="mockup">
-        <div class="mock-head theme-blue">
+        <div class="mock-head theme-purple">
           <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-bot"/></svg></div>
           <div><span class="mock-name">DigiBuur Assistant</span><span class="mock-sub">Online — replies instantly</span></div>
         </div>
         <div class="mock-body">
-          <div class="msg msg-bot theme-blue">Welcome! I'm the digital assistant. How can I help you?</div>
-          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-purple">Welcome! I’m the digital assistant. How can I help you?</div>
           <div class="msg msg-user">What are your opening hours?</div>
-          <div class="msg-clear"></div>
-          <div class="msg msg-bot theme-blue">We're available Mon–Fri from 9:00 AM to 5:00 PM. Would you like to book an appointment right away?</div>
-          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-purple">We are available Monday to Friday from 9:00 AM to 5:00 PM. Would you like to schedule an appointment right away?</div>
           <div class="msg msg-user">Yes please, tomorrow at 2:00 PM?</div>
-          <div class="msg-clear"></div>
-          <div class="msg msg-bot theme-blue">Noted! Your appointment is scheduled for tomorrow at 2:00 PM. You'll receive a confirmation by email.</div>
-          <div class="msg-clear"></div>
+          <div class="msg msg-bot theme-purple">Done! Your appointment has been scheduled for tomorrow at 2:00 PM. You will receive a confirmation by email.</div>
         </div>
       </div>
     </div>
@@ -331,14 +433,14 @@ body { padding: 10px 20px 10px; }
 
   <!-- ========== SOCIAL MEDIA ========== -->
   <div class="panel" data-p="1">
-    <div class="left theme-purple">
+    <div class="left theme-blue">
       <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-social"/></svg></div>
       <h3>Social Media & Content Assistant</h3>
       <p class="left-sub">Automate your entire social media presence</p>
       <ul class="benefits">
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically generates posts tailored to your brand</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Schedules and publishes on Instagram, Facebook & LinkedIn</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically replies to comments and DMs</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatically responds to comments and DMs</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Analyzes performance and optimizes your strategy</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Creates visual content with AI-generated images</span></li>
       </ul>
@@ -346,7 +448,7 @@ body { padding: 10px 20px 10px; }
     </div>
     <div class="right">
       <div class="mockup">
-        <div class="mock-head theme-purple">
+        <div class="mock-head theme-blue">
           <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-social"/></svg></div>
           <div><span class="mock-name">Content Planner</span><span class="mock-sub">3 posts scheduled this week</span></div>
         </div>
@@ -359,7 +461,7 @@ body { padding: 10px 20px 10px; }
                 <span class="s-time">Today, 10:00 AM — <span class="s-badge" style="background:#dcfce7;color:#16a34a;">Posted</span></span>
               </div>
             </div>
-            <span class="s-text">New project completed! Proud launch of a website for a local bakery. #webdesign #smallbusiness</span>
+            <span class="s-text">New project completed! Proud launch of the website for a local bakery. #webdesign #sme</span>
             <div class="s-engage"><span>47 likes</span><span>12 comments</span><span>8 shares</span></div>
           </div>
           <div class="s-card">
@@ -380,7 +482,7 @@ body { padding: 10px 20px 10px; }
                 <span class="s-time">Wednesday, 2:00 PM — <span class="s-badge" style="background:#f3e8ff;color:#7c3aed;">Scheduled</span></span>
               </div>
             </div>
-            <span class="s-text">Did you know that 73% of SMEs save time with AI? Discover how we can help you.</span>
+            <span class="s-text">Did you know 73% of SMEs save time with AI? Discover how we can help you.</span>
           </div>
         </div>
       </div>
@@ -395,8 +497,8 @@ body { padding: 10px 20px 10px; }
       <p class="left-sub">Reduce missed appointments with smart reminders</p>
       <ul class="benefits">
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic reminders via SMS and WhatsApp</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Patients confirm or reschedule with one click</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Open slots are offered directly to your waiting list</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Patients can confirm or reschedule with one click</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Freed-up slots are immediately offered to the waiting list</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Connects with your existing calendar and practice software</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Fully GDPR-compliant and secure</span></li>
       </ul>
@@ -415,7 +517,7 @@ body { padding: 10px 20px 10px; }
             <span class="r-info">Tomorrow 2:00 PM | Reminder sent via WhatsApp</span>
           </div>
           <div class="r-card">
-            <span class="r-status" style="background:#fef3c7;color:#d97706;">Waiting for confirmation</span>
+            <span class="r-status" style="background:#fef3c7;color:#d97706;">Awaiting confirmation</span>
             <span class="r-name">M. Bakker — Treatment</span>
             <span class="r-info">Tomorrow 3:30 PM | SMS sent 2 hours ago</span>
           </div>
@@ -438,14 +540,14 @@ body { padding: 10px 20px 10px; }
   <div class="panel" data-p="3">
     <div class="left theme-orange">
       <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-doc"/></svg></div>
-      <h3>Quote System + Follow-Up</h3>
+      <h3>Quote System + Follow-up</h3>
       <p class="left-sub">Generate professional quotes in seconds</p>
       <ul class="benefits">
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Generate professional quotes with one click</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic follow-up if the quote hasn't been viewed</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Automatic follow-up if the quote has not been viewed</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Online acceptance with digital signature</span></li>
         <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Real-time notifications when the client opens the quote</span></li>
-        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Insight into conversion rates and follow-up timing</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Insight into conversion rates and follow-up moments</span></li>
       </ul>
       <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
     </div>
@@ -465,11 +567,122 @@ body { padding: 10px 20px 10px; }
           <div class="q-row"><span class="q-lbl">Content creation (3 mo)</span><span class="q-val">€600</span></div>
           <div class="q-row q-total">
             <span style="font-weight:700;color:#2d3748;">Total</span>
-            <span style="font-weight:700;color:#a04b10;font-size:15px;">€4.300</span>
+            <span style="font-weight:700;color:#f97316;font-size:15px;">€4.300</span>
           </div>
           <div class="act-btns">
-            <div class="act-btn" style="background:#a04b10;color:#fff;">Accept</div>
+            <div class="act-btn" style="background:#f97316;color:#fff;">Accept</div>
             <div class="act-btn" style="border:2px solid #e2e8f0;color:#718096;">Ask a question</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OFFICE ASSISTANT ========== -->
+  <div class="panel" data-p="4">
+    <div class="left theme-teal">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-briefcase"/></svg></div>
+      <h3>Office Assistant</h3>
+      <p class="left-sub">Let recurring admin work be handled automatically</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Processes emails, intake requests and callback notes automatically</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Creates summaries and prepares actions instantly for follow-up</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Saves time on administration and internal communication</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Helps your team respond faster without extra office pressure</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Works smartly with your calendar, inbox and CRM</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-teal">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-briefcase"/></svg></div>
+          <div><span class="mock-name">Office Flow</span><span class="mock-sub">Inbox, actions and follow-up</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="o-card">
+            <div class="o-top">
+              <span class="o-title">New intake processed</span>
+              <span class="o-tag" style="background:#dcfce7;color:#16a34a;">Done</span>
+            </div>
+            <div class="o-line">Contact details saved and forwarded to the team.</div>
+            <div class="o-line">Next step: proposal email scheduled for today at 3:30 PM.</div>
+          </div>
+
+          <div class="o-card">
+            <div class="o-top">
+              <span class="o-title">Email summarized</span>
+              <span class="o-tag" style="background:#e0f2fe;color:#0369a1;">New</span>
+            </div>
+            <div class="o-line">Subject: callback request for practice software.</div>
+            <div class="o-line">Action: task created for sales + reminder tomorrow at 9:00 AM.</div>
+          </div>
+
+          <div class="o-card">
+            <div class="o-top">
+              <span class="o-title">Weekly overview ready</span>
+              <span class="o-tag" style="background:#f3e8ff;color:#7c3aed;">Automatic</span>
+            </div>
+            <div class="o-line">12 requests processed, 4 callback requests open, 3 quotes sent.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== AI VOICE AGENT ========== -->
+  <div class="panel" data-p="5">
+    <div class="left theme-rose">
+      <div class="left-icon"><svg width="20" height="20" style="color:#fff;"><use href="#ico-phone"/></svg></div>
+      <h3>AI Voice Agent</h3>
+      <p class="left-sub">Answer phone calls without having to pick up every time</p>
+      <ul class="benefits">
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Answers the phone 24/7 in your style and tone of voice</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Answers questions, schedules appointments and records callback requests</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Sends an instant summary to you or your team</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Prevents missed opportunities outside opening hours or during busy times</span></li>
+        <li class="benefit"><span class="benefit-check"><svg width="10" height="10" style="color:#fff;"><use href="#ico-check"/></svg></span><span>Gives customers immediate reassurance, clarity and a professional first impression</span></li>
+      </ul>
+      <a class="cta" href="javascript:void(0)" onclick="if(window.parent!==window){window.parent.postMessage({type:'digibuur-navigate',target:'contact'},'*')}else{window.location.hash='contact'}">Yes, I want this too!</a>
+    </div>
+    <div class="right">
+      <div class="mockup">
+        <div class="mock-head theme-rose">
+          <div class="mock-av"><svg width="14" height="14" style="color:#fff;"><use href="#ico-phone"/></svg></div>
+          <div><span class="mock-name">Roos — Call Log</span><span class="mock-sub">Latest calls processed automatically</span></div>
+        </div>
+        <div class="mock-body">
+          <div class="call-card">
+            <div class="call-row">
+              <div>
+                <div class="call-name">M. de Jong</div>
+                <div class="call-meta">Today 09:12 • 2m 18s</div>
+              </div>
+              <span class="call-pill" style="background:#dcfce7;color:#16a34a;">Appointment scheduled</span>
+            </div>
+            <div class="call-note">Check-up appointment booked for Thursday at 10:30 AM. Confirmation sent by SMS.</div>
+          </div>
+
+          <div class="call-card">
+            <div class="call-row">
+              <div>
+                <div class="call-name">Anonymous number</div>
+                <div class="call-meta">Today 10:47 • 1m 05s</div>
+              </div>
+              <span class="call-pill" style="background:#fef3c7;color:#d97706;">Callback request</span>
+            </div>
+            <div class="call-note">Asked about rates and availability. Name + phone number neatly recorded.</div>
+          </div>
+
+          <div class="call-card">
+            <div class="call-row">
+              <div>
+                <div class="call-name">S. Hoekstra</div>
+                <div class="call-meta">Today 12:03 • 0m 52s</div>
+              </div>
+              <span class="call-pill" style="background:#e0f2fe;color:#0369a1;">Question answered</span>
+            </div>
+            <div class="call-note">Opening hours shared and route information provided. No follow-up needed.</div>
           </div>
         </div>
       </div>
@@ -482,11 +695,13 @@ body { padding: 10px 20px 10px; }
 (function() {
   var tabs   = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.panel');
+  var tabsEl = document.getElementById('tabs');
+  var desktopMinPanelHeight = 318;
 
-  /* ── Core resize sender ── */
-  function sendHeight() {
+  /* ── Send height to Carrd parent ── */
+  function sendHeight(override) {
     if (window.parent === window) return;
-    var h = Math.max(
+    var h = override || Math.max(
       document.body.scrollHeight,
       document.body.offsetHeight,
       document.documentElement.scrollHeight,
@@ -495,30 +710,53 @@ body { padding: 10px 20px 10px; }
     window.parent.postMessage({ type: 'digibuur-resize', height: h - 10 }, '*');
   }
 
+  /* ── Measure panel height BEFORE it becomes visible ── */
+  function measurePanel(panel) {
+    panel.classList.add('pre-measure');
+    var h = panel.offsetHeight;
+    panel.classList.remove('pre-measure');
+
+    if (window.innerWidth > 800) {
+      h = Math.max(h, desktopMinPanelHeight);
+    }
+    return h;
+  }
+
   /* ── Switch tab ── */
   function switchTo(idx) {
-    tabs.forEach(function(t, i)   { t.classList.toggle('active', i === idx); });
-    panels.forEach(function(p, i) { p.classList.toggle('active', i === idx); });
+    var nextPanel = panels[idx];
+    var panelH = measurePanel(nextPanel);
+    var totalH = tabsEl.offsetHeight + 12 + panelH + 20;
 
-    /* Double rAF: waits for browser to fully layout the new panel before measuring */
+    sendHeight(totalH);
+
+    tabs.forEach(function(t, i) {
+      t.classList.toggle('active', i === idx);
+    });
+    panels.forEach(function(p, i) {
+      p.classList.toggle('active', i === idx);
+    });
+
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
         sendHeight();
-        setTimeout(sendHeight, 150); /* iOS fallback for slow reflows */
       });
     });
   }
 
   /* ── Bind clicks + touch ── */
   tabs.forEach(function(tab, i) {
-    tab.addEventListener('click',    function()  { switchTo(i); });
-    tab.addEventListener('touchend', function(e) { e.preventDefault(); switchTo(i); });
+    tab.addEventListener('click', function() { switchTo(i); });
+    tab.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      switchTo(i);
+    });
   });
 
   /* ── Initial height on load ── */
   function onReady() {
     sendHeight();
-    setTimeout(sendHeight, 300); /* fonts / images may still be loading */
+    setTimeout(sendHeight, 300);
   }
 
   if (document.readyState === 'loading') {
@@ -526,15 +764,15 @@ body { padding: 10px 20px 10px; }
   } else {
     onReady();
   }
-  window.addEventListener('load', sendHeight); /* after images load */
 
-  /* ── Re-measure on viewport resize (e.g. phone rotation, keyboard pop-up) ── */
+  window.addEventListener('load', sendHeight);
+
+  /* ── Re-measure on viewport resize ── */
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(sendHeight, 150);
   });
-
 })();
 </script>
 
